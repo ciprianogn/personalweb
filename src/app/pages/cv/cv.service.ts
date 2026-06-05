@@ -6,20 +6,29 @@ import {
   CvData, Skill, Study, Work, Task, AbilityBySkill, AbilityGroupItem
 } from './cv.interfaces';
 import { map, catchError, of, shareReplay } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class CvService {
   private http = inject(HttpClient);
-  // Cambiá a environment si querés switchear API/JSON.
-  private src = 'assets/cv.json';
+  // Fallback offline si la API no responde.
+  private jsonSrc = 'assets/cv.json';
 
   getCv() {
-    return this.http.get<RawCvFile>(this.src).pipe(
+    // La API devuelve el CV ya normalizado: { success, data: CvData }
+    return this.http.get<{ success: boolean; data: CvData }>(`${environment.apiBase}/cv`).pipe(
+      map(res => res.data),
+      catchError(() => this.getCvFromJson()),
+      shareReplay(1)
+    );
+  }
+
+  private getCvFromJson() {
+    return this.http.get<RawCvFile>(this.jsonSrc).pipe(
       map(raw => this.normalize(raw)),
       catchError(() => of({
         studies: [], works: [], tasks: [], skills: [], abilitiesBySkill: []
-      } as CvData)),
-      shareReplay(1)
+      } as CvData))
     );
   }
 
