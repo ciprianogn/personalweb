@@ -1,10 +1,15 @@
+<!-- Error de carga -->
+<div *ngIf="loadError && !loading" class="max-w-3xl pt-6 px-4 sm:px-6 lg:px-8 mx-auto py-20 text-center">
+  <p class="text-gray-500 dark:text-neutral-400 text-lg">No pudimos cargar el contenido en este momento. Probá de nuevo más tarde.</p>
+</div>
+
 <!-- Blog Article (About Me loaded from WP) -->
-<div class="max-w-3xl pt-6 px-4 sm:px-6 lg:px-8 mx-auto">
+<div *ngIf="!loadError" class="max-w-3xl pt-6 px-4 sm:px-6 lg:px-8 mx-auto">
     <!-- Avatar Media -->
     <div class="flex justify-between items-center mb-6">
       <div class="flex w-full sm:items-center gap-x-5 sm:gap-x-3">
         <div class="shrink-0">
-          <img class="size-12 rounded-full" src="https://github.com/Cipriano26.png" alt="Avatar">
+          <img class="size-12 rounded-full" src="assets/img/avatar-cipriano.jpg" alt="Cipriano Gorosito">
         </div>
 
         <div class="grow">
@@ -21,9 +26,6 @@
               <!-- End Tooltip -->
 
               <ul class="text-xs text-gray-500 dark:text-neutral-500">
-                <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
-                  24 años
-                </li>
                 <li class="inline-block relative pe-6 last:pe-0 last-of-type:before:hidden before:absolute before:top-1/2 before:end-2 before:-translate-y-1/2 before:size-1 before:bg-gray-300 before:rounded-full dark:text-neutral-400 dark:before:bg-neutral-600">
                   Bs.As, Argentina
                 </li>

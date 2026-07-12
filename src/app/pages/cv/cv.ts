@@ -1,9 +1,10 @@
 // src/app/cv/cv.component.ts
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { Component, OnInit, computed, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CvService } from './cv.service';
 import html2pdf from 'html2pdf.js';
 import { CvData, Task, Skill } from './cv.interfaces';
+import { SeoService } from '../../seo.service';
 
 @Component({
   selector: 'app-cv',
@@ -17,9 +18,13 @@ export class Cv implements OnInit {
   data = signal<CvData>({ studies: [], works: [], tasks: [], skills: [], abilitiesBySkill: [] });
   showAboutModal = signal(false);
 
+  private seo = inject(SeoService);
+
   constructor(private cv: CvService) {}
 
   ngOnInit(): void {
+    this.seo.update({ title: 'CV — Cipriano Gorosito' });
+
     this.cv.getCv().subscribe({
       next: d => {
         this.data.set(d);
@@ -89,8 +94,7 @@ export class Cv implements OnInit {
   }
 
   // Exporta solo el contenido del main (#cv-print) a PDF
-  exportPdf(event: Event): void {
-    event.preventDefault();
+  exportPdf(): void {
     const el = document.getElementById('cv-print');
     if (!el) return;
 

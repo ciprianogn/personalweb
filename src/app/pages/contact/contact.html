@@ -93,6 +93,7 @@
   </div>
 </div>
 <!-- End Icon Blocks -->
+
 <!-- Contact Us -->
 <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
   <div class="max-w-xl mx-auto">
@@ -101,7 +102,7 @@
         Contacto
       </h1>
       <p class="mt-1 text-gray-600 dark:text-neutral-400">
-        Me encantaria hablar con vos. Contame como puedo ayudarte.
+        Me encantaría hablar con vos. Contame cómo puedo ayudarte.
       </p>
     </div>
   </div>
@@ -110,55 +111,140 @@
     <!-- Card -->
     <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
       <h2 class="mb-8 text-xl font-semibold text-gray-800 dark:text-neutral-200">
-        Completa el formulario
+        Completá el formulario
       </h2>
 
-      <form>
+      <!-- Mensaje de éxito -->
+      @if (enviado) {
+        <div class="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 dark:bg-green-900/20 dark:border-green-800">
+          <p class="text-sm font-medium text-green-800 dark:text-green-400">
+            ¡Gracias! Te voy a responder lo antes posible.
+          </p>
+        </div>
+      }
+
+      <!-- Mensaje de error -->
+      @if (errorMsg) {
+        <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 dark:bg-red-900/20 dark:border-red-800">
+          <p class="text-sm font-medium text-red-800 dark:text-red-400">
+            {{ errorMsg }}
+          </p>
+        </div>
+      }
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="grid gap-4 lg:gap-6">
-          <!-- Grid -->
+          <!-- Grid Nombre / Apellido -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
             <div>
-              <label for="hs-firstname-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Nombre</label>
-              <input type="text" name="hs-firstname-contacts-1" id="hs-firstname-contacts-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <label for="contact-nombre" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Nombre <span class="text-red-500">*</span></label>
+              <input
+                type="text"
+                id="contact-nombre"
+                formControlName="nombre"
+                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                [class.border-red-400]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
+                placeholder="Tu nombre">
+              @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
+                <p class="mt-1 text-xs text-red-600 dark:text-red-400">Ingresá tu nombre.</p>
+              }
             </div>
 
             <div>
-              <label for="hs-lastname-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Apellido</label>
-              <input type="text" name="hs-lastname-contacts-1" id="hs-lastname-contacts-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <label for="contact-apellido" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Apellido</label>
+              <input
+                type="text"
+                id="contact-apellido"
+                formControlName="apellido"
+                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder="Tu apellido">
             </div>
           </div>
           <!-- End Grid -->
 
-          <!-- Grid -->
+          <!-- Grid Email / Teléfono -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
             <div>
-              <label for="hs-email-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Email</label>
-              <input type="email" name="hs-email-contacts-1" id="hs-email-contacts-1" autocomplete="email" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <label for="contact-email" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Email <span class="text-red-500">*</span></label>
+              <input
+                type="email"
+                id="contact-email"
+                formControlName="email"
+                autocomplete="email"
+                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                [class.border-red-400]="form.get('email')?.invalid && form.get('email')?.touched"
+                placeholder="tu&#64;email.com">
+              @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                  @if (form.get('email')?.errors?.['required']) {
+                    Ingresá tu email.
+                  } @else {
+                    El email no es válido.
+                  }
+                </p>
+              }
             </div>
 
             <div>
-              <label for="hs-phone-number-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Telefono</label>
-              <input type="text" name="hs-phone-number-1" id="hs-phone-number-1" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <label for="contact-telefono" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Teléfono</label>
+              <input
+                type="text"
+                id="contact-telefono"
+                formControlName="telefono"
+                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                placeholder="+54 9 11 0000 0000">
             </div>
           </div>
           <!-- End Grid -->
 
           <div>
-            <label for="hs-about-contacts-1" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Detalles</label>
-            <textarea id="hs-about-contacts-1" name="hs-about-contacts-1" rows="4" class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"></textarea>
+            <label for="contact-mensaje" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">¿En qué puedo ayudarte? <span class="text-red-500">*</span></label>
+            <textarea
+              id="contact-mensaje"
+              formControlName="mensaje"
+              rows="4"
+              class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+              [class.border-red-400]="form.get('mensaje')?.invalid && form.get('mensaje')?.touched"
+              placeholder="Contame un poco sobre tu proyecto o consulta..."></textarea>
+            @if (form.get('mensaje')?.invalid && form.get('mensaje')?.touched) {
+              <p class="mt-1 text-xs text-red-600 dark:text-red-400">
+                @if (form.get('mensaje')?.errors?.['required']) {
+                  Contanos un poco más sobre lo que necesitás.
+                } @else {
+                  El mensaje debe tener al menos 10 caracteres.
+                }
+              </p>
+            }
           </div>
         </div>
         <!-- End Grid -->
 
+        <!-- Honeypot anti-spam -->
+        <div class="hidden" aria-hidden="true">
+          <input
+            type="text"
+            formControlName="website"
+            tabindex="-1"
+            autocomplete="off"
+            placeholder="No completar">
+        </div>
+
         <div class="mt-6 grid">
-          <button type="submit" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-black focus:outline-hidden focus:bg-black dark:hover:bg-neutral-200 dark:focus:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none">
-            Enviar
+          <button
+            type="submit"
+            [disabled]="form.invalid || enviando"
+            class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-black focus:outline-hidden focus:bg-black dark:hover:bg-neutral-200 dark:focus:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none">
+            @if (enviando) {
+              Enviando&hellip;
+            } @else {
+              Enviar
+            }
           </button>
         </div>
 
         <div class="mt-3 text-center">
           <p class="text-sm text-gray-500 dark:text-neutral-500">
-            Te voy a responder lo mas rapido que pueda.
+            Te voy a responder lo más rápido que pueda.
           </p>
         </div>
       </form>
@@ -201,7 +287,7 @@
     <a class="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10" href="https://www.youtube.com/@ciprianogn" target="_blank" rel="noreferrer">
       <div class="mt-5">
         <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-            YouTube    
+            YouTube
         </h3>
         <p class="mt-1 text-gray-500 dark:text-neutral-500">
             Explicaciones más completas, proyectos en detalle y reflexiones más extensas.

@@ -1,5 +1,10 @@
+<!-- Error de carga -->
+<div *ngIf="loadError" class="max-w-[85rem] px-4 py-20 sm:px-6 lg:px-8 mx-auto text-center">
+  <p class="text-gray-500 dark:text-neutral-400 text-lg">No pudimos cargar el contenido en este momento. Probá de nuevo más tarde.</p>
+</div>
+
 <!-- Hero: última entrada -->
-<div class="px-4 sm:px-6 lg:px-8" style="margin-top: 1rem;">
+<div *ngIf="!loadError" class="px-4 sm:px-6 lg:px-8" style="margin-top: 1rem;">
   <div class="relative h-120 md:h-[80dvh] flex flex-col bg-cover bg-center bg-no-repeat rounded-2xl"
        [style.background-image]="bg(latest)">
     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-2xl"></div>
@@ -18,7 +23,7 @@
 <!-- End Hero -->
 
 <!-- Card Blog -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+<div *ngIf="!loadError" class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <!-- Title -->
   <div class="max-w-2xl mb-10">
     <h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">Últimas entradas</h2>

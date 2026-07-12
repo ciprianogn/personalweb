@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute } from '@angular/router';
 import { CmsService } from './blog.service';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { SeoService } from '../../seo.service';
 
 @Component({
   selector: 'app-blog',
@@ -17,13 +18,21 @@ export class Blog {
   catId = 2;
   latest: any | null = null;
   q: string = '';
+  loadError = false;
   // subcategorías del padre catId y mapa de posts por subcategoría
   subcats: any[] = [];
   postsBySubcat: Record<number, any[]> = {};
 
+  private seo = inject(SeoService);
+
   constructor(private route: ActivatedRoute, private cms: CmsService, private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
+    this.seo.update({
+      title: 'Blog — Cipriano Gorosito',
+      description: 'Artículos, devocionales y reflexiones de Cipriano Gorosito.'
+    });
+
     this.catId = this.resolveCatIdFromRoute();
     // Suscribirse a cambios de query params para búsqueda o cambio de categoría
     this.route.queryParamMap.subscribe((qp) => {
@@ -37,20 +46,24 @@ export class Blog {
   }
 
   private load() {
+    this.loadError = false;
     const obs = this.q
       ? this.cms.searchInCategory(this.catId, this.q)
       : this.cms.listByCategory(this.catId, 1, 4);
-    obs.subscribe((arr) => {
-      this.posts = arr ?? [];
-      // Toma las primeras 3-5 entradas para el hero
-      this.heroPosts = this.posts.slice(0, 3);
-      // Última entrada para el hero single
-      this.latest = this.posts[0] ?? null;
-      // Inicializa/reinicializa el carrusel de Preline cuando ya hay slides en el DOM
-      queueMicrotask(() => {
-        const anyWin: any = window as any;
-        try { anyWin?.HSStaticMethods?.autoInit?.(); } catch {}
-      });
+    obs.subscribe({
+      next: (arr) => {
+        this.posts = arr ?? [];
+        // Toma las primeras 3-5 entradas para el hero
+        this.heroPosts = this.posts.slice(0, 3);
+        // Última entrada para el hero single
+        this.latest = this.posts[0] ?? null;
+        // Inicializa/reinicializa el carrusel de Preline cuando ya hay slides en el DOM
+        queueMicrotask(() => {
+          const anyWin: any = window as any;
+          try { anyWin?.HSStaticMethods?.autoInit?.(); } catch {}
+        });
+      },
+      error: () => { this.loadError = true; }
     });
 
   // Cargar subcategorías del padre id=2 (pedido explícito) y traer posts de cada una

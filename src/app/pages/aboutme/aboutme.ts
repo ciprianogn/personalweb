@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CmsService } from '../blog/blog.service';
+import { inject } from '@angular/core';
+import { SeoService } from '../../seo.service';
 
 @Component({
   selector: 'app-aboutme',
@@ -34,10 +36,18 @@ export class Aboutme implements AfterViewInit {
   commentErrorMsg = '';
 
   private readonly SLUG = 'te-cuento-un-poco-sobre-mi';
+  loadError = false;
+
+  private seo = inject(SeoService);
 
   constructor(private cms: CmsService) {}
 
   ngOnInit() {
+    this.seo.update({
+      title: 'Sobre mí — Cipriano Gorosito',
+      description: 'Conocé a Cipriano Gorosito: desarrollador web, diseñador y creador de comunidades.'
+    });
+
     this.cms.postBySlug(this.SLUG).subscribe({
       next: (arr) => {
         this.post = arr?.[0];
@@ -66,7 +76,7 @@ export class Aboutme implements AfterViewInit {
           try { (window as any)?.HSStaticMethods?.autoInit?.(); } catch {}
         });
       },
-      error: () => { this.loading = false; }
+      error: () => { this.loading = false; this.loadError = true; }
     });
   }
 
