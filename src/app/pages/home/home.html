@@ -91,6 +91,8 @@
         <a
           class="external-link"
           [href]="site.missionCases[0].url"
+          target="_blank"
+          rel="noopener noreferrer"
           (click)="track('iglesia_dominico_click')"
         >
           <span>{{ site.missionCases[0].cta }}</span>
@@ -109,7 +111,13 @@
           }
         </div>
         <p class="mission-learning">{{ site.missionCases[1].learning }}</p>
-        <a class="external-link" [href]="site.missionCases[1].url" (click)="track('wenumew_click')">
+        <a
+          class="external-link"
+          [href]="site.missionCases[1].url"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="track('wenumew_click')"
+        >
           <span>{{ site.missionCases[1].cta }}</span>
           <span aria-hidden="true">↗</span>
         </a>
@@ -179,6 +187,8 @@
         <a
           class="external-link"
           [href]="site.ecosystem[0].url"
+          target="_blank"
+          rel="noopener noreferrer"
           [attr.aria-label]="site.ecosystem[0].ariaLabel"
           (click)="track('prichelco_external_click')"
         >
@@ -199,6 +209,8 @@
         <a
           class="external-link"
           [href]="site.ecosystem[1].url"
+          target="_blank"
+          rel="noopener noreferrer"
           [attr.aria-label]="site.ecosystem[1].ariaLabel"
           (click)="track('yateino_external_click')"
         >
