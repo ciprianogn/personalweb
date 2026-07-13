@@ -76,7 +76,7 @@ export const siteConfig = {
   whatsappUrl: 'https://wa.me/541128173122?text=Hola%20Cipriano',
   linkedinUrl: 'https://ar.linkedin.com/in/ciprianogn',
   githubUrl: 'https://github.com/Cipriano26',
-  cvDownloadPath: '/downloads/cipriano-gorosito-cv.pdf',
+  cvDownloadPath: '/assets/files/cipriano-gorosito-cv.pdf',
   navigation: [
     { label: 'Inicio', path: '/' },
     { label: 'Mi enfoque', path: '/sobre-mi' },
