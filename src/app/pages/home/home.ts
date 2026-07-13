@@ -56,7 +56,7 @@ export class Home implements OnInit {
             'https://www.instagram.com/ciprianogn/',
             'https://prichelco.com.ar/',
             'https://yateino.com.ar/',
-            'https://iglesiadominico.com.ar/',
+            'https://www.instagram.com/iglesiadominico/',
           ],
         },
         {

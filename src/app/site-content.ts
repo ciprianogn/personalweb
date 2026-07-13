@@ -172,7 +172,7 @@ export const siteConfig = {
       ],
       learning:
         'La misión se fortalece cuando mensaje, operación, tecnología y personas dejan de trabajar por separado.',
-      url: 'https://iglesiadominico.com.ar/',
+      url: 'https://www.instagram.com/iglesiadominico/',
       cta: 'Conocer Iglesia Dominico',
     },
     {
