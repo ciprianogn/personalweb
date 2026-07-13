@@ -1,11 +1,26 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-    { path: '', loadComponent: () => import('./pages/home/home').then(m => m.Home) },
-    { path: 'contact', loadComponent: () => import('./pages/contact/contact').then(m => m.Contact) },
-    { path: 'cv', loadComponent: () => import('./pages/cv/cv').then(m => m.Cv) },
-    { path: 'blog', loadChildren: () => import('./pages/blog/blog.module').then(m => m.BlogModule) },
-    { path: 'services', loadComponent: () => import('./pages/projects/projects').then(m => m.Projects) },
-    { path: 'media', loadComponent: () => import('./pages/media/media').then(m => m.Media) },
-    { path: 'aboutme', loadComponent: () => import('./pages/aboutme/aboutme').then(m => m.Aboutme) }
+  { path: '', loadComponent: () => import('./pages/home/home').then((m) => m.Home) },
+  { path: 'sobre-mi', loadComponent: () => import('./pages/aboutme/aboutme').then((m) => m.Aboutme) },
+  {
+    path: 'comunicacion-y-mision',
+    loadComponent: () => import('./pages/projects/projects').then((m) => m.Projects),
+  },
+  {
+    path: 'experiencia',
+    loadComponent: () => import('./pages/experience/experience').then((m) => m.Experience),
+  },
+  { path: 'contenido', loadChildren: () => import('./pages/blog/blog.routes').then((m) => m.BLOG_ROUTES) },
+  { path: 'contacto', loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact) },
+  { path: 'contact', redirectTo: 'contacto', pathMatch: 'full' },
+  { path: 'aboutme', redirectTo: 'sobre-mi', pathMatch: 'full' },
+  { path: 'services', redirectTo: 'comunicacion-y-mision', pathMatch: 'full' },
+  { path: 'media', redirectTo: 'contenido', pathMatch: 'full' },
+  { path: 'cv', redirectTo: 'experiencia', pathMatch: 'full' },
+  { path: 'blog', redirectTo: 'contenido', pathMatch: 'full' },
+  { path: 'blog/:slug', redirectTo: 'contenido/:slug', pathMatch: 'full' },
+  { path: 'blog/cat/:catId', redirectTo: 'contenido', pathMatch: 'full' },
+  { path: 'blog/tag/:tagId', redirectTo: 'contenido', pathMatch: 'full' },
+  { path: '**', loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound) },
 ];

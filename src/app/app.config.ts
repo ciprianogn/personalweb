@@ -1,13 +1,11 @@
-import { ApplicationConfig, LOCALE_ID, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { LOCALE_ID, ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
 import localeEs from '@angular/common/locales/es';
-
-import { routes } from './app.routes';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
+import { routes } from './app.routes';
 
-// Registrar datos de localización en español para pipes de fecha/número
 registerLocaleData(localeEs);
 
 export const appConfig: ApplicationConfig = {
@@ -18,11 +16,11 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
-        scrollPositionRestoration: 'enabled'
-      })
+        scrollPositionRestoration: 'enabled',
+      }),
     ),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay()),
-    { provide: LOCALE_ID, useValue: 'es' }
-  ]
+    { provide: LOCALE_ID, useValue: 'es' },
+  ],
 };

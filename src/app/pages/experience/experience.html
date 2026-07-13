@@ -1,0 +1,133 @@
+<main id="main-content" class="page-shell">
+  <section class="hero-section page-hero-compact experience-hero">
+    <div class="section-heading max-w-5xl">
+      <p class="section-eyebrow">Experiencia</p>
+      <h1 class="hero-title">{{ site.experiencePage.title }}</h1>
+      <p class="hero-copy">{{ site.experiencePage.description }}</p>
+      <p class="body-copy">{{ site.experiencePage.summary }}</p>
+    </div>
+
+    <div class="button-row page-print-hidden">
+      <a class="button-primary" [href]="cvPath" download>Descargar CV</a>
+      <a class="button-secondary" [href]="site.linkedinUrl" target="_blank" rel="noopener noreferrer">Ver LinkedIn</a>
+      <a class="button-secondary" routerLink="/contacto">Contactarme</a>
+    </div>
+
+    <p class="page-print-note page-print-hidden">Versión pensada para recruiters, equipos de producto y colaboraciones técnicas.</p>
+  </section>
+
+  <section class="section">
+    <div class="experience-layout">
+      <div class="space-y-10">
+        <div class="section-heading">
+          <p class="section-eyebrow">Experiencia laboral</p>
+          <h2 class="section-title">Trabajo entre necesidad, solución e implementación.</h2>
+        </div>
+
+        <div class="experience-timeline">
+          @for (item of site.experiencePage.timeline; track item.organization + item.title) {
+            <article class="timeline-item">
+              <div class="timeline-period">
+                <span>{{ item.period }}</span>
+                <small>{{ item.location }}</small>
+              </div>
+              <div class="timeline-body">
+                <h3 class="experience-title">{{ item.title }}</h3>
+                <p class="experience-company">{{ item.organization }}</p>
+                <p class="experience-copy">{{ item.description }}</p>
+                <ul class="data-list">
+                  @for (detail of item.highlights; track detail) {
+                    <li>{{ detail }}</li>
+                  }
+                </ul>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <aside class="experience-aside">
+        <article class="panel-strong">
+          <p class="section-eyebrow">Servicio y misión</p>
+          <ul class="data-list">
+            @for (item of site.experiencePage.serviceContexts; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+
+        <article class="panel">
+          <p class="section-eyebrow">Accesos</p>
+          <div class="quick-links">
+            <a [href]="cvPath" download>Descargar CV en PDF</a>
+            <a [href]="site.linkedinUrl" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a [href]="site.githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a [href]="'mailto:' + site.email">Email directo</a>
+          </div>
+        </article>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="section-eyebrow">Capacidades</p>
+      <h2 class="section-title">Áreas en las que participo de manera real.</h2>
+    </div>
+
+    <div class="capability-grid">
+      @for (group of site.experiencePage.capabilityGroups; track group.title) {
+        <article class="panel capability-card">
+          <p class="section-eyebrow">{{ group.title }}</p>
+          <p class="mission-copy">{{ group.description }}</p>
+          <ul class="data-list">
+            @for (item of group.items; track item) {
+              <li>{{ item }}</li>
+            }
+          </ul>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="section-eyebrow">Stack técnico</p>
+      <h2 class="section-title">Herramientas agrupadas por función, no como nube de logos.</h2>
+    </div>
+
+    <div class="stack-grid">
+      @for (group of site.experiencePage.stackGroups; track group.title) {
+        <article class="panel-strong stack-card">
+          <p class="section-eyebrow">{{ group.title }}</p>
+          <p class="mission-copy">{{ group.description }}</p>
+          <div class="label-stack">
+            @for (item of group.items; track item) {
+              <span class="label-chip">{{ item }}</span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <p class="section-eyebrow">Formación</p>
+      <h2 class="section-title">Base técnica, actualización y aprendizaje continuo.</h2>
+    </div>
+
+    <div class="education-list">
+      @for (item of site.experiencePage.education; track item.title) {
+        <article class="education-item">
+          <p class="education-period">{{ item.period }}</p>
+          <div>
+            <h3 class="mission-title">{{ item.title }}</h3>
+            <p class="experience-company">{{ item.institution }}</p>
+            <p class="mission-copy">{{ item.detail }}</p>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+</main>

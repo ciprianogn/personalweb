@@ -1,12 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ContactService } from './contact.service';
+import { Component, OnInit, inject, signal } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SeoService } from '../../seo.service';
+import { siteConfig } from '../../site-content';
+import { ContactService } from './contact.service';
+
+type ContactMode = 'career' | 'mission';
 
 @Component({
   selector: 'app-contact',
@@ -15,21 +13,25 @@ import { SeoService } from '../../seo.service';
   styleUrl: './contact.css',
 })
 export class Contact implements OnInit {
-  private fb = inject(FormBuilder);
-  private contactService = inject(ContactService);
-  private seo = inject(SeoService);
+  private readonly fb = inject(FormBuilder);
+  private readonly contactService = inject(ContactService);
+  private readonly seo = inject(SeoService);
 
-  ngOnInit(): void {
-    this.seo.update({ title: 'Contacto — Cipriano Gorosito' });
-  }
+  readonly site = siteConfig;
+  readonly contactMode = signal<ContactMode>('career');
 
-  form: FormGroup = this.fb.group({
+  readonly form = this.fb.group({
     nombre: ['', [Validators.required]],
-    apellido: [''],
     email: ['', [Validators.required, Validators.email]],
-    telefono: [''],
-    mensaje: ['', [Validators.required, Validators.minLength(10)]],
-    // Honeypot anti-spam — debe quedar vacío
+    empresa: [''],
+    opportunityType: ['', [Validators.required]],
+    modality: [''],
+    organization: [''],
+    projectType: [''],
+    stage: [''],
+    objective: [''],
+    mensaje: ['', [Validators.required, Validators.minLength(20)]],
+    consentimiento: [false, [Validators.requiredTrue]],
     website: [''],
   });
 
@@ -37,8 +39,25 @@ export class Contact implements OnInit {
   enviado = false;
   errorMsg = '';
 
+  ngOnInit(): void {
+    this.seo.update({
+      title: 'Contacto | Cipriano Gorosito',
+      description:
+        'Contacto segmentado para oportunidades profesionales, proyectos tecnológicos y comunicación con propósito.',
+      path: '/contacto',
+      type: 'website',
+    });
+
+    this.applyModeValidators('career');
+  }
+
+  setMode(mode: ContactMode): void {
+    this.contactMode.set(mode);
+    this.errorMsg = '';
+    this.applyModeValidators(mode);
+  }
+
   onSubmit(): void {
-    // Anti-spam: si el honeypot viene relleno, cortamos silenciosamente
     if (this.form.get('website')?.value) {
       return;
     }
@@ -51,18 +70,62 @@ export class Contact implements OnInit {
     this.enviando = true;
     this.errorMsg = '';
 
-    const { nombre, apellido, email, telefono, mensaje } = this.form.value;
+    const value = this.form.getRawValue();
+    const mode = this.contactMode();
+    const composedMessage =
+      mode === 'career'
+        ? [
+            'Tipo de contacto: Oportunidad profesional',
+            value.empresa ? `Empresa: ${value.empresa}` : '',
+            value.opportunityType ? `Tipo de oportunidad: ${value.opportunityType}` : '',
+            value.modality ? `Modalidad: ${value.modality}` : '',
+            '',
+            value.mensaje,
+          ]
+        : [
+            'Tipo de contacto: Proyecto o misión',
+            value.organization ? `Organización: ${value.organization}` : '',
+            value.projectType ? `Tipo de proyecto: ${value.projectType}` : '',
+            value.stage ? `Etapa actual: ${value.stage}` : '',
+            value.objective ? `Problema u objetivo: ${value.objective}` : '',
+            '',
+            value.mensaje,
+          ];
 
-    this.contactService.enviar({ nombre, apellido, email, telefono, mensaje }).subscribe({
-      next: () => {
-        this.enviando = false;
-        this.enviado = true;
-        this.form.reset();
-      },
-      error: (err: Error) => {
-        this.enviando = false;
-        this.errorMsg = err.message;
-      },
-    });
+    this.contactService
+      .enviar({
+        nombre: value.nombre ?? '',
+        email: value.email ?? '',
+        mensaje: composedMessage.filter(Boolean).join('\n'),
+      })
+      .subscribe({
+        next: () => {
+          this.enviado = true;
+          this.enviando = false;
+          this.form.reset({ consentimiento: false, website: '' });
+        },
+        error: (err: Error) => {
+          this.enviando = false;
+          this.errorMsg = err.message;
+        },
+      });
+  }
+
+  private applyModeValidators(mode: ContactMode): void {
+    const opportunityType = this.form.get('opportunityType');
+    const projectType = this.form.get('projectType');
+
+    if (mode === 'career') {
+      opportunityType?.setValidators([Validators.required]);
+      projectType?.clearValidators();
+      projectType?.setValue('', { emitEvent: false });
+    } else {
+      projectType?.setValidators([Validators.required]);
+      opportunityType?.clearValidators();
+      opportunityType?.setValue('', { emitEvent: false });
+    }
+
+    opportunityType?.updateValueAndValidity({ emitEvent: false });
+    projectType?.updateValueAndValidity({ emitEvent: false });
   }
 }

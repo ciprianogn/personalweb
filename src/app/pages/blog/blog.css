@@ -1,0 +1,28 @@
+.blog-loading,
+.blog-layout {
+  @apply grid gap-6 lg:grid-cols-[1.08fr_0.92fr];
+}
+
+.blog-featured {
+  @apply space-y-5;
+}
+
+.blog-featured-image {
+  @apply aspect-[16/10] w-full rounded-sm border border-[rgba(255,255,255,0.08)] object-cover;
+}
+
+.blog-side {
+  @apply space-y-6 self-start;
+}
+
+.blog-secondary {
+  @apply border-b border-[rgba(255,255,255,0.08)] pb-5;
+}
+
+.blog-secondary:last-child {
+  @apply border-b-0 pb-0;
+}
+
+.archive-list {
+  @apply mt-12;
+}

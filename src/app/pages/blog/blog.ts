@@ -1,105 +1,70 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
-import { CmsService } from './blog.service';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { catchError, of } from 'rxjs';
 import { SeoService } from '../../seo.service';
+import { siteConfig } from '../../site-content';
+import { CmsService, ContentPost } from './blog.service';
 
 @Component({
   selector: 'app-blog',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterLink, DatePipe],
   templateUrl: './blog.html',
-  styleUrl: './blog.css'
+  styleUrl: './blog.css',
 })
-export class Blog {
-  posts: any[] = [];
-  heroPosts: any[] = [];
-  catId = 2;
-  latest: any | null = null;
-  q: string = '';
-  loadError = false;
-  // subcategorías del padre catId y mapa de posts por subcategoría
-  subcats: any[] = [];
-  postsBySubcat: Record<number, any[]> = {};
+export class Blog implements OnInit {
+  private readonly cms = inject(CmsService);
+  private readonly seo = inject(SeoService);
 
-  private seo = inject(SeoService);
+  readonly site = siteConfig;
 
-  constructor(private route: ActivatedRoute, private cms: CmsService, private sanitizer: DomSanitizer) {}
+  posts: ContentPost[] = [];
+  loading = true;
+  error = '';
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.seo.update({
-      title: 'Blog — Cipriano Gorosito',
-      description: 'Artículos, devocionales y reflexiones de Cipriano Gorosito.'
+      title: 'Ideas sobre comunicación, misión y tecnología | Cipriano Gorosito',
+      description:
+        'Artículos y reflexiones sobre comunicación cristiana, estrategia, creatividad, producto y tecnología aplicada.',
+      path: '/contenido',
+      type: 'website',
     });
 
-    this.catId = this.resolveCatIdFromRoute();
-    // Suscribirse a cambios de query params para búsqueda o cambio de categoría
-    this.route.queryParamMap.subscribe((qp) => {
-      const catParam = qp.get('cat');
-      const parsed = catParam ? parseInt(catParam, 10) : NaN;
-      this.catId = Number.isFinite(parsed) && parsed > 0 ? parsed : this.resolveCatIdFromRoute();
-
-      this.q = (qp.get('search') || '').trim();
-      this.load();
-    });
+    this.load();
   }
 
-  private load() {
-    this.loadError = false;
-    const obs = this.q
-      ? this.cms.searchInCategory(this.catId, this.q)
-      : this.cms.listByCategory(this.catId, 1, 4);
-    obs.subscribe({
-      next: (arr) => {
-        this.posts = arr ?? [];
-        // Toma las primeras 3-5 entradas para el hero
-        this.heroPosts = this.posts.slice(0, 3);
-        // Última entrada para el hero single
-        this.latest = this.posts[0] ?? null;
-        // Inicializa/reinicializa el carrusel de Preline cuando ya hay slides en el DOM
-        queueMicrotask(() => {
-          const anyWin: any = window as any;
-          try { anyWin?.HSStaticMethods?.autoInit?.(); } catch {}
-        });
-      },
-      error: () => { this.loadError = true; }
-    });
+  load(): void {
+    this.loading = true;
+    this.error = '';
 
-  // Cargar subcategorías del padre id=2 (pedido explícito) y traer posts de cada una
-  const parentForSubcats = 2;
-  this.cms.subcategoriesOf(parentForSubcats).subscribe((cats) => {
-      this.subcats = cats ?? [];
-      // Reset mapa
-      this.postsBySubcat = {};
-      // Por cada subcategoría, pedir últimos posts (máximo 4 para esta vista)
-      this.subcats.forEach((c) => {
-        const id = c?.id;
-        if (!Number.isFinite(id)) return;
-        this.cms.listByCategory(id, 1, 4).subscribe((list) => {
-          this.postsBySubcat[id] = list ?? [];
-        });
+    this.cms
+      .listRecent(1, 9)
+      .pipe(
+        catchError(() => {
+          this.error = 'No pude cargar el contenido en este momento.';
+          return of([]);
+        }),
+      )
+      .subscribe((posts) => {
+        this.posts = posts;
+        this.loading = false;
       });
-    });
   }
 
-  featured(p: any): string | null {
-    return p?._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null;
+  imageFor(post: ContentPost): string | null {
+    return this.cms.featuredImage(post);
   }
 
-  bg(p: any): SafeStyle {
-    const url = this.featured(p);
-    return this.sanitizer.bypassSecurityTrustStyle(url ? `url('${url}')` : 'none');
+  altFor(post: ContentPost): string {
+    return this.cms.featuredAlt(post);
   }
 
-  // Construye el link hacia /blog/:slug (sin :project)
-  linkFor(p: any): any[] {
-    return ['/', 'blog', p?.slug];
+  excerptFor(post: ContentPost): string {
+    return post.excerpt.rendered.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
   }
 
-  private resolveCatIdFromRoute(): number {
-    // Lee catId si existiera (ya no usamos :project). Fallback a defaultCatId o 2
-    const selfData = this.route.snapshot.data || {};
-    return (selfData['catId'] ?? selfData['defaultCatId'] ?? 2) as number;
+  readingTimeFor(post: ContentPost): string {
+    return this.cms.estimateReadingTime(post.content.rendered);
   }
 }

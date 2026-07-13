@@ -1,60 +1,22 @@
 import { Component } from '@angular/core';
-import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { siteConfig } from '../../site-content';
 
 @Component({
   selector: 'app-footer',
-  imports: [NgIf, RouterLink],
+  imports: [RouterLink],
   templateUrl: './footer.html',
-  styleUrls: ['./footer.css']
+  styleUrl: './footer.css',
 })
 export class Footer {
-  isDark = false;
-  year = new Date().getFullYear();
-
-  constructor() {
-    try {
-      // sync with existing DOM class or saved preference
-      const saved = localStorage.getItem('theme');
-      if (saved === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else if (saved === 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (prefersDark) document.documentElement.classList.add('dark');
-      }
-      this.isDark = document.documentElement.classList.contains('dark');
-    } catch (e) {
-      // ignore
-    }
-  }
-
-  enableDark(log = true) {
-    const prev = document.documentElement.classList.contains('dark');
-    if (!prev) {
-      document.documentElement.classList.add('dark');
-      try { localStorage.setItem('theme', 'dark'); } catch (e) {}
-    }
-    this.isDark = true;
-  }
-
-  disableDark(log = true) {
-    const prev = document.documentElement.classList.contains('dark');
-    if (prev) {
-      document.documentElement.classList.remove('dark');
-      try { localStorage.setItem('theme', 'light'); } catch (e) {}
-    }
-    this.isDark = false;
-  }
-
-  toggleTheme() {
-    // read actual DOM state to avoid divergence with external scripts
-    const currentlyDark = document.documentElement.classList.contains('dark');
-    if (currentlyDark) {
-      this.disableDark();
-    } else {
-      this.enableDark();
-    }
-  }
+  readonly navigation = siteConfig.navigation;
+  readonly socialLinks = siteConfig.socialLinks;
+  readonly siteName = siteConfig.siteName;
+  readonly year = new Date().getFullYear();
+  readonly email = siteConfig.email;
+  readonly linkedinUrl = siteConfig.linkedinUrl;
+  readonly githubUrl = siteConfig.githubUrl;
+  readonly instagramUrl = 'https://www.instagram.com/ciprianogn/';
+  readonly youtubeUrl = 'https://www.youtube.com/@ciprianogn';
+  readonly cvPath = siteConfig.cvDownloadPath;
 }

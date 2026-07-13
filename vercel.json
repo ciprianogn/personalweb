@@ -2,5 +2,14 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/personalweb/browser",
+  "redirects": [
+    { "source": "/contact", "destination": "/contacto", "permanent": true },
+    { "source": "/aboutme", "destination": "/sobre-mi", "permanent": true },
+    { "source": "/services", "destination": "/comunicacion-y-mision", "permanent": true },
+    { "source": "/media", "destination": "/contenido", "permanent": true },
+    { "source": "/cv", "destination": "/experiencia", "permanent": true },
+    { "source": "/blog", "destination": "/contenido", "permanent": true },
+    { "source": "/blog/:slug", "destination": "/contenido/:slug", "permanent": true }
+  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }

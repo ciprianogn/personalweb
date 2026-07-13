@@ -1,303 +1,174 @@
-<!-- Hero -->
-<div class="overflow-hidden">
-  <div class="max-w-5xl mx-auto px-4 xl:px-0 lg:pt-10 pb-10">
-    <h1 class="font-semibold text-black-400 dark:text-white text-5xl md:text-6xl">
-      <span class="inline-block rounded-lg dark:text-white text-black-900 font-extrabold shadow-sm">Hablemos,</span> llevemos tus ideas a la realidad
-    </h1>
-    <div class="mt-5 max-w-4xl">
-      <p class="text-neutral-400 text-lg">
-        Quiero escucharte y ayudarte a dar el siguiente paso. Ya sea que necesites una web, mejorar la comunicación de tu proyecto o simplemente quieras compartir una idea, estoy listo para trabajar con vos. Elegí el medio que te quede más cómodo y charlemos.
-      </p>
+<main id="main-content" class="page-shell">
+  <section class="hero-section page-hero-compact">
+    <div class="section-heading max-w-5xl">
+      <p class="section-eyebrow">Contacto</p>
+      <h1 class="hero-title">{{ site.contactPage.title }}</h1>
+      <p class="hero-copy">{{ site.contactPage.description }}</p>
     </div>
-  </div>
-</div>
-<!-- End Hero -->
+  </section>
 
-<!-- Icon Blocks -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 items-center gap-2">
-    <!-- Icon Block -->
-    <div class="group flex flex-col justify-center hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" aria-disabled="true">
-      <div class="flex justify-center items-center size-12 text-white dark:text-gray-900 bg-gray-900 dark:bg-white rounded-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-      </div>
-      <div class="mt-5">
-        <h3 class="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-            Correo directo
-        </h3>
-        <p class="mt-1 text-gray-600 dark:text-neutral-400">
-            Podés escribirme cuando quieras, respondo en 1-2 días hábiles.
-        </p>
-        <span class="mt-2 inline-flex items-center gap-x-1.5 text-sm text-gray-900 dark:text-white decoration-2 group-hover:underline group-focus:underline font-medium">
-          ciprianongorosito@gmail.com
-        </span>
-      </div>
-    </div>
-    <!-- End Icon Block -->
-    <!-- Icon Block -->
-    <div class="group flex flex-col justify-center hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" aria-disabled="true">
-      <div class="flex justify-center items-center size-12 text-white dark:text-gray-900 bg-gray-900 dark:bg-white rounded-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle-icon lucide-message-circle"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"/></svg>
-      </div>
-      <div class="mt-5">
-        <h3 class="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-            WhatsApp / Telegram
-        </h3>
-        <p class="mt-1 text-gray-600 dark:text-neutral-400">
-            Si preferís algo rápido y directo, mandame un mensaje.
-        </p>
-        <span class="mt-2 inline-flex items-center gap-x-1.5 text-sm text-gray-900 dark:text-white decoration-2 group-hover:underline group-focus:underline font-medium">
-          +54 9 11 2817 3122
-        </span>
-      </div>
-    </div>
-    <!-- End Icon Block -->
+  <section class="section">
+    <div class="contact-layout">
+      <aside class="contact-channels">
+        @for (channel of site.contactPage.directChannels; track channel.title) {
+          <article class="panel">
+            <p class="section-eyebrow">{{ channel.title }}</p>
+            <p class="mission-copy">{{ channel.description }}</p>
+            <a class="inline-link" [href]="channel.href" target="_blank" rel="noopener noreferrer">
+              {{ channel.value }}
+            </a>
+          </article>
+        }
+      </aside>
 
-    <!-- Icon Block -->
-    <div class="group flex flex-col justify-center hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" aria-disabled="true">
-      <div class="flex justify-center items-center size-12 text-white dark:text-gray-900 bg-gray-900 dark:bg-white rounded-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hash-icon lucide-hash"><line x1="4" x2="20" y1="9" y2="9"/><line x1="4" x2="20" y1="15" y2="15"/><line x1="10" x2="8" y1="3" y2="21"/><line x1="16" x2="14" y1="3" y2="21"/></svg>
-      </div>
-      <div class="mt-5">
-        <h3 class="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-            Redes sociales
-        </h3>
-        <p class="mt-1 text-gray-600 dark:text-neutral-400">
-            También podés encontrarme y escribirme en mis redes.
-        </p>
-        <span class="mt-2 inline-flex items-center gap-x-1.5 text-sm text-gray-900 dark:text-white decoration-2 group-hover:underline group-focus:underline font-medium">
-          @ciprianogn
-        </span>
-      </div>
-    </div>
-    <!-- End Icon Block -->
+      <div class="panel-strong contact-form-shell">
+        <fieldset class="segment-switch">
+          <legend class="field-legend">Qué tipo de contacto querés iniciar</legend>
 
-    <!-- Icon Block -->
-    <div class="group flex flex-col justify-center hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" aria-disabled="true">
-      <div class="flex justify-center items-center size-12 text-white dark:text-gray-900 bg-gray-900 dark:bg-white rounded-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-locate-icon lucide-locate"><line x1="2" x2="5" y1="12" y2="12"/><line x1="19" x2="22" y1="12" y2="12"/><line x1="12" x2="12" y1="2" y2="5"/><line x1="12" x2="12" y1="19" y2="22"/><circle cx="12" cy="12" r="7"/></svg>
-      </div>
-      <div class="mt-5">
-        <h3 class="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-            Acompañamiento personal
-        </h3>
-        <p class="mt-1 text-gray-600 dark:text-neutral-400">
-            Voy a estar disponible para guiarte en cada etapa de tu proyecto.
-        </p>
-        <span class="mt-2 inline-flex items-center gap-x-1.5 text-sm text-gray-900 dark:text-white decoration-2 group-hover:underline group-focus:underline font-medium">
-          Buenos Aires, Argentina
-        </span>
-      </div>
-    </div>
-    <!-- End Icon Block -->
-  </div>
-</div>
-<!-- End Icon Blocks -->
+          <label class="segment-option" [class.is-active]="contactMode() === 'career'">
+            <input
+              type="radio"
+              name="contact-mode"
+              [checked]="contactMode() === 'career'"
+              (change)="setMode('career')"
+            />
+            <span>Oportunidad profesional</span>
+          </label>
 
-<!-- Contact Us -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <div class="max-w-xl mx-auto">
-    <div class="text-center">
-      <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">
-        Contacto
-      </h1>
-      <p class="mt-1 text-gray-600 dark:text-neutral-400">
-        Me encantaría hablar con vos. Contame cómo puedo ayudarte.
-      </p>
-    </div>
-  </div>
+          <label class="segment-option" [class.is-active]="contactMode() === 'mission'">
+            <input
+              type="radio"
+              name="contact-mode"
+              [checked]="contactMode() === 'mission'"
+              (change)="setMode('mission')"
+            />
+            <span>Proyecto o misión</span>
+          </label>
+        </fieldset>
 
-  <div class="mt-12 max-w-lg mx-auto">
-    <!-- Card -->
-    <div class="flex flex-col border border-gray-200 rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
-      <h2 class="mb-8 text-xl font-semibold text-gray-800 dark:text-neutral-200">
-        Completá el formulario
-      </h2>
-
-      <!-- Mensaje de éxito -->
-      @if (enviado) {
-        <div class="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 dark:bg-green-900/20 dark:border-green-800">
-          <p class="text-sm font-medium text-green-800 dark:text-green-400">
-            ¡Gracias! Te voy a responder lo antes posible.
-          </p>
+        <div class="segment-intro" aria-live="polite">
+          @if (contactMode() === 'career') {
+            <p class="mission-copy">
+              Para empresas, recruiters, equipos de producto, colaboraciones técnicas y oportunidades profesionales.
+            </p>
+          } @else {
+            <p class="mission-copy">
+              Para iglesias, ministerios, marcas, organizaciones o proyectos que necesitan estrategia, contenido, tecnología o sistema.
+            </p>
+          }
         </div>
-      }
 
-      <!-- Mensaje de error -->
-      @if (errorMsg) {
-        <div class="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 dark:bg-red-900/20 dark:border-red-800">
-          <p class="text-sm font-medium text-red-800 dark:text-red-400">
+        @if (enviado) {
+          <div class="form-feedback success">
+            Gracias. Recibí tu mensaje y te voy a responder lo antes posible.
+          </div>
+        }
+
+        @if (errorMsg) {
+          <div class="form-feedback error">
             {{ errorMsg }}
-          </p>
-        </div>
-      }
-
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="grid gap-4 lg:gap-6">
-          <!-- Grid Nombre / Apellido -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-            <div>
-              <label for="contact-nombre" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Nombre <span class="text-red-500">*</span></label>
-              <input
-                type="text"
-                id="contact-nombre"
-                formControlName="nombre"
-                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                [class.border-red-400]="form.get('nombre')?.invalid && form.get('nombre')?.touched"
-                placeholder="Tu nombre">
-              @if (form.get('nombre')?.invalid && form.get('nombre')?.touched) {
-                <p class="mt-1 text-xs text-red-600 dark:text-red-400">Ingresá tu nombre.</p>
-              }
-            </div>
-
-            <div>
-              <label for="contact-apellido" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Apellido</label>
-              <input
-                type="text"
-                id="contact-apellido"
-                formControlName="apellido"
-                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                placeholder="Tu apellido">
-            </div>
           </div>
-          <!-- End Grid -->
+        }
 
-          <!-- Grid Email / Teléfono -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-            <div>
-              <label for="contact-email" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Email <span class="text-red-500">*</span></label>
-              <input
-                type="email"
-                id="contact-email"
-                formControlName="email"
-                autocomplete="email"
-                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                [class.border-red-400]="form.get('email')?.invalid && form.get('email')?.touched"
-                placeholder="tu&#64;email.com">
-              @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                <p class="mt-1 text-xs text-red-600 dark:text-red-400">
-                  @if (form.get('email')?.errors?.['required']) {
-                    Ingresá tu email.
-                  } @else {
-                    El email no es válido.
-                  }
-                </p>
-              }
+        <form class="contact-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="contact-grid">
+            <div class="field">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" type="text" formControlName="nombre" />
             </div>
 
-            <div>
-              <label for="contact-telefono" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">Teléfono</label>
-              <input
-                type="text"
-                id="contact-telefono"
-                formControlName="telefono"
-                class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                placeholder="+54 9 11 0000 0000">
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" type="email" formControlName="email" autocomplete="email" />
             </div>
-          </div>
-          <!-- End Grid -->
 
-          <div>
-            <label for="contact-mensaje" class="block mb-2 text-sm text-gray-700 font-medium dark:text-white">¿En qué puedo ayudarte? <span class="text-red-500">*</span></label>
-            <textarea
-              id="contact-mensaje"
-              formControlName="mensaje"
-              rows="4"
-              class="py-2.5 sm:py-3 px-4 block w-full border-gray-200 rounded-lg sm:text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-              [class.border-red-400]="form.get('mensaje')?.invalid && form.get('mensaje')?.touched"
-              placeholder="Contame un poco sobre tu proyecto o consulta..."></textarea>
-            @if (form.get('mensaje')?.invalid && form.get('mensaje')?.touched) {
-              <p class="mt-1 text-xs text-red-600 dark:text-red-400">
-                @if (form.get('mensaje')?.errors?.['required']) {
-                  Contanos un poco más sobre lo que necesitás.
-                } @else {
-                  El mensaje debe tener al menos 10 caracteres.
-                }
-              </p>
-            }
-          </div>
-        </div>
-        <!-- End Grid -->
+            @if (contactMode() === 'career') {
+              <div class="field">
+                <label for="empresa">Empresa</label>
+                <input id="empresa" type="text" formControlName="empresa" />
+              </div>
 
-        <!-- Honeypot anti-spam -->
-        <div class="hidden" aria-hidden="true">
-          <input
-            type="text"
-            formControlName="website"
-            tabindex="-1"
-            autocomplete="off"
-            placeholder="No completar">
-        </div>
+              <div class="field">
+                <label for="opportunityType">Tipo de oportunidad</label>
+                <select id="opportunityType" formControlName="opportunityType">
+                  <option value="">Elegí una opción</option>
+                  <option value="Puesto full-time">Puesto full-time</option>
+                  <option value="Colaboración por proyecto">Colaboración por proyecto</option>
+                  <option value="Consultoría técnica o estratégica">Consultoría técnica o estratégica</option>
+                  <option value="Otra oportunidad">Otra oportunidad</option>
+                </select>
+              </div>
 
-        <div class="mt-6 grid">
-          <button
-            type="submit"
-            [disabled]="form.invalid || enviando"
-            class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-gray-900 text-white dark:bg-white dark:text-gray-900 hover:bg-black focus:outline-hidden focus:bg-black dark:hover:bg-neutral-200 dark:focus:bg-neutral-200 disabled:opacity-50 disabled:pointer-events-none">
-            @if (enviando) {
-              Enviando&hellip;
+              <div class="field md:col-span-2">
+                <label for="modality">Modalidad</label>
+                <select id="modality" formControlName="modality">
+                  <option value="">Elegí una opción</option>
+                  <option value="Remoto">Remoto</option>
+                  <option value="Híbrido">Híbrido</option>
+                  <option value="Presencial">Presencial</option>
+                  <option value="A conversar">A conversar</option>
+                </select>
+              </div>
             } @else {
-              Enviar
+              <div class="field">
+                <label for="organization">Organización</label>
+                <input id="organization" type="text" formControlName="organization" />
+              </div>
+
+              <div class="field">
+                <label for="projectType">Tipo de proyecto</label>
+                <select id="projectType" formControlName="projectType">
+                  <option value="">Elegí una opción</option>
+                  <option value="Iglesia o ministerio">Iglesia o ministerio</option>
+                  <option value="Marca u organización">Marca u organización</option>
+                  <option value="Proyecto de contenido">Proyecto de contenido</option>
+                  <option value="Plataforma o sistema digital">Plataforma o sistema digital</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="stage">Etapa actual</label>
+                <select id="stage" formControlName="stage">
+                  <option value="">Elegí una opción</option>
+                  <option value="Diagnóstico">Diagnóstico</option>
+                  <option value="Ordenamiento y estrategia">Ordenamiento y estrategia</option>
+                  <option value="Producción o campaña">Producción o campaña</option>
+                  <option value="Implementación técnica">Implementación técnica</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="objective">Problema u objetivo</label>
+                <input id="objective" type="text" formControlName="objective" />
+              </div>
             }
+
+            <div class="field md:col-span-2">
+              <label for="mensaje">Mensaje</label>
+              <textarea id="mensaje" rows="7" formControlName="mensaje"></textarea>
+            </div>
+          </div>
+
+          <label class="consent-field">
+            <input type="checkbox" formControlName="consentimiento" />
+            <span>Entiendo que este mensaje será usado solo para responder esta consulta.</span>
+          </label>
+
+          <div class="hidden" aria-hidden="true">
+            <input type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <button class="button-primary w-full justify-center md:w-auto" type="submit" [disabled]="form.invalid || enviando">
+            {{
+              enviando
+                ? 'Enviando...'
+                : contactMode() === 'career'
+                  ? 'Conversar sobre una oportunidad'
+                  : 'Conversar sobre el proyecto'
+            }}
           </button>
-        </div>
-
-        <div class="mt-3 text-center">
-          <p class="text-sm text-gray-500 dark:text-neutral-500">
-            Te voy a responder lo más rápido que pueda.
-          </p>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
-    <!-- End Card -->
-  </div>
-
-  <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 lg:gap-8 scroll-mt-24" id="socials">
-    <!-- Icon Block -->
-    <a class="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10" href="https://www.instagram.com/ciprianogn" target="_blank" rel="noreferrer">
-      <div class="mt-5">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-            Instagram
-        </h3>
-        <p class="mt-1 text-gray-500 dark:text-neutral-500">
-            Contenido visual de mis proyectos, diseño y el detrás de escena de lo que hago.
-        </p>
-        <p class="mt-5 inline-flex items-center gap-x-1 font-medium text-gray-900 dark:text-white">
-          Seguir en Instagram
-        </p>
-      </div>
-    </a>
-    <!-- End Icon Block -->
-
-    <!-- Icon Block -->
-    <a class="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10" href="https://www.tiktok.com/@ciprianogn" target="_blank" rel="noreferrer">
-      <div class="mt-5">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-            TikTok
-        </h3>
-        <p class="mt-1 text-gray-500 dark:text-neutral-500">Videos cortos y dinámicos con tips, reflexiones y un lado más cercano de mi trabajo.</p>
-        <p class="mt-5 inline-flex items-center gap-x-1 font-medium text-gray-900 dark:text-white">
-          Ver en TikTok
-        </p>
-      </div>
-    </a>
-    <!-- End Icon Block -->
-
-    <!-- Icon Block -->
-    <a class="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10" href="https://www.youtube.com/@ciprianogn" target="_blank" rel="noreferrer">
-      <div class="mt-5">
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-            YouTube
-        </h3>
-        <p class="mt-1 text-gray-500 dark:text-neutral-500">
-            Explicaciones más completas, proyectos en detalle y reflexiones más extensas.
-        </p>
-        <p class="mt-5 inline-flex items-center gap-x-1 font-medium text-gray-900 dark:text-white">
-          Suscribirse en YouTube
-        </p>
-      </div>
-    </a>
-    <!-- End Icon Block -->
-  </div>
-</div>
-<!-- End Contact Us -->
+  </section>
+</main>

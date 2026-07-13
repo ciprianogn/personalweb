@@ -1,77 +1,98 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, Observable } from 'rxjs';
 import { environment as env } from '../../../environments/environment';
+
+export interface ContentPost {
+  id: number;
+  slug: string;
+  title: { rendered: string };
+  excerpt: { rendered: string };
+  content: { rendered: string };
+  date: string;
+  modified: string;
+  categories: number[];
+  _embedded?: {
+    'wp:featuredmedia'?: Array<{
+      source_url: string;
+      alt_text?: string;
+    }>;
+  };
+}
 
 @Injectable({ providedIn: 'root' })
 export class CmsService {
-  private api = `${env.wpApi}/posts`;
-  private tagsApi = `${env.wpApi}/tags`;
-  private categoriesApi = `${env.wpApi}/categories`;
-  private commentsApi = `${env.wpApi}/comments`;
+  private readonly api = `${env.wpApi}/posts`;
 
   constructor(private http: HttpClient) {}
 
-  listByCategory(catId: number, page = 1, perPage = 12) {
-    const params = new HttpParams({ fromObject: { categories: catId, _embed: '1', per_page: perPage, page } });
-    return this.http.get<any[]>(this.api, { params });
+  listRecent(page = 1, perPage = 12): Observable<ContentPost[]> {
+    const params = new HttpParams({
+      fromObject: {
+        categories: 2,
+        _embed: '1',
+        per_page: perPage,
+        page,
+        orderby: 'date',
+        order: 'desc',
+      },
+    });
+
+    return this.http.get<ContentPost[]>(this.api, { params });
   }
 
-  searchInCategory(catId: number, q: string, page = 1) {
-    const params = new HttpParams({ fromObject: { categories: catId, search: q, _embed: '1', per_page: 20, page } });
-    return this.http.get<any[]>(this.api, { params });
+  searchRecent(query: string, page = 1, perPage = 12): Observable<ContentPost[]> {
+    const params = new HttpParams({
+      fromObject: {
+        categories: 2,
+        search: query,
+        _embed: '1',
+        per_page: perPage,
+        page,
+        orderby: 'date',
+        order: 'desc',
+      },
+    });
+
+    return this.http.get<ContentPost[]>(this.api, { params });
   }
 
-  postBySlug(slug: string) {
+  postBySlug(slug: string): Observable<ContentPost | null> {
     const params = new HttpParams({ fromObject: { slug, _embed: '1' } });
-    return this.http.get<any[]>(this.api, { params });
+    return this.http
+      .get<ContentPost[]>(this.api, { params })
+      .pipe(map((posts) => posts[0] ?? null));
   }
 
-  tagsByIds(ids: number[]) {
-    if (!ids?.length) return this.http.get<any[]>(this.tagsApi, { params: new HttpParams() });
-    const params = new HttpParams({ fromObject: { include: ids.join(',') } });
-    return this.http.get<any[]>(this.tagsApi, { params });
+  listRelated(post: ContentPost, perPage = 3): Observable<ContentPost[]> {
+    const category = post.categories[0];
+    const params = new HttpParams({
+      fromObject: {
+        categories: category,
+        _embed: '1',
+        per_page: perPage + 1,
+        orderby: 'date',
+        order: 'desc',
+      },
+    });
+
+    return this.http
+      .get<ContentPost[]>(this.api, { params })
+      .pipe(map((posts) => posts.filter((item) => item.slug !== post.slug).slice(0, perPage)));
   }
 
-  // Lista subcategorías (categorías hijas) de un padre dado
-  subcategoriesOf(parentId: number, perPage = 100, page = 1) {
-    const params = new HttpParams({ fromObject: { parent: parentId, per_page: perPage, page } });
-    return this.http.get<any[]>(this.categoriesApi, { params });
+  featuredImage(post: ContentPost): string | null {
+    return post._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? null;
   }
 
-  // Obtiene una categoría por ID
-  categoryById(id: number) {
-    return this.http.get<any>(`${this.categoriesApi}/${id}`);
+  featuredAlt(post: ContentPost): string {
+    return post._embedded?.['wp:featuredmedia']?.[0]?.alt_text || post.title.rendered;
   }
 
-  // Lista posts por conjunto de tags (cualquiera de ellos)
-  listByTags(tagIds: number[], page = 1, perPage = 12) {
-    const include = (tagIds || []).filter((n) => Number.isFinite(n) && n > 0);
-    const params = new HttpParams({ fromObject: { tags: include.join(','), _embed: '1', per_page: perPage, page } });
-    return this.http.get<any[]>(this.api, { params });
-  }
-
-  // Obtiene un tag por ID
-  tagById(id: number) {
-    return this.http.get<any>(`${this.tagsApi}/${id}`);
-  }
-
-  // Comentarios
-  getComments(postId: number, page = 1, perPage = 50) {
-    const params = new HttpParams({ fromObject: { post: postId, per_page: perPage, page, order: 'asc' } });
-    return this.http.get<any[]>(this.commentsApi, { params });
-  }
-
-  addComment(payload: { post: number; author_name?: string; author_email?: string; content: string; parent?: number }) {
-    // Nota: Para que funcione sin auth, el sitio WP debe permitir comentarios anónimos (discusión) y/o manejar moderación.
-    return this.http.post<any>(this.commentsApi, payload);
-  }
-
-  // Engagement
-  like(postId: number) {
-    return this.http.post<any>(`${env.wpBase}/engagement/v1/like`, { postId });
-  }
-
-  share(postId: number, channel: string) {
-    return this.http.post<any>(`${env.wpBase}/engagement/v1/share`, { postId, channel });
+  estimateReadingTime(html: string): string {
+    const plain = html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    const words = plain ? plain.split(' ').length : 0;
+    const minutes = Math.max(1, Math.round(words / 220));
+    return `${minutes} min de lectura`;
   }
 }

@@ -1,0 +1,3 @@
+.footer-copy {
+  @apply max-w-md text-sm leading-7 text-[rgb(var(--text-secondary))];
+}

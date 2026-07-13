@@ -1,0 +1,49 @@
+.flow-shell {
+  @apply grid gap-8 lg:grid-cols-[0.58fr_0.42fr] lg:items-start;
+}
+
+.flow-rail {
+  @apply grid gap-3;
+}
+
+.flow-stage {
+  @apply grid grid-cols-[auto_1fr] gap-4 rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] px-4 py-4 text-left transition hover:border-[rgba(193,117,79,0.28)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[rgb(var(--accent-400))] focus-visible:ring-offset-2 focus-visible:ring-offset-[rgb(var(--bg-950))];
+}
+
+.flow-stage.is-active {
+  @apply border-[rgba(193,117,79,0.42)] bg-[rgba(193,117,79,0.08)];
+}
+
+.flow-index {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply inline-flex h-9 w-9 items-center justify-center rounded-sm border border-[rgba(255,255,255,0.12)] text-xs text-[rgb(var(--text-secondary))];
+}
+
+.flow-stage.is-active .flow-index {
+  @apply border-[rgba(193,117,79,0.46)] text-[rgb(var(--text-primary))];
+}
+
+.flow-label {
+  @apply flex flex-col gap-1;
+}
+
+.flow-label strong {
+  @apply text-base font-semibold text-[rgb(var(--text-primary))];
+}
+
+.flow-label small {
+  @apply text-sm leading-6 text-[rgb(var(--text-secondary))];
+}
+
+.flow-detail {
+  @apply rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-6 md:p-8;
+}
+
+.flow-detail-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  @apply mt-4 text-[2rem] font-semibold leading-[0.94] text-[rgb(var(--text-primary))];
+}
+
+.flow-detail-copy {
+  @apply mt-4 text-base leading-8 text-[rgb(var(--text-secondary))];
+}

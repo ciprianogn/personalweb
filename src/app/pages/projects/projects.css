@@ -1,0 +1,41 @@
+.layer-map {
+  @apply mt-10 grid gap-4;
+}
+
+.layer-row {
+  @apply grid gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4 md:grid-cols-[3.5rem_1fr];
+}
+
+.layer-marker {
+  @apply relative;
+}
+
+.layer-marker::after {
+  content: '';
+  @apply absolute bottom-[-1.5rem] left-1/2 top-10 w-px -translate-x-1/2 bg-[rgba(255,255,255,0.08)];
+}
+
+.layer-row:last-child .layer-marker::after {
+  display: none;
+}
+
+.layer-marker span {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[rgba(193,117,79,0.32)] text-xs text-[rgb(var(--accent-300))];
+}
+
+.mission-evidence-grid {
+  @apply mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr];
+}
+
+.evidence-highlight {
+  @apply border-[rgba(193,117,79,0.24)] bg-[rgba(193,117,79,0.05)];
+}
+
+.collaboration-grid {
+  @apply mt-10 grid gap-6 lg:grid-cols-3;
+}
+
+.collaboration-card {
+  @apply space-y-4;
+}

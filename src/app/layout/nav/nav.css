@@ -1,0 +1,19 @@
+.is-active {
+  @apply text-[rgb(var(--text-primary))];
+}
+
+.desktop-nav .is-active,
+.mobile-nav-panel .is-active {
+  position: relative;
+}
+
+.desktop-nav .is-active::after,
+.mobile-nav-panel .is-active::after {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.15rem;
+  height: 1px;
+  background: rgba(193, 117, 79, 0.88);
+}

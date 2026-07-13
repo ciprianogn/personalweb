@@ -1,0 +1,47 @@
+.contact-layout {
+  @apply grid gap-6 xl:grid-cols-[0.36fr_0.64fr];
+}
+
+.contact-channels {
+  @apply grid gap-6 self-start;
+}
+
+.contact-form-shell {
+  @apply space-y-6;
+}
+
+.segment-switch {
+  @apply grid gap-3;
+}
+
+.segment-option {
+  @apply flex items-center gap-3 rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] px-4 py-4 text-sm text-[rgb(var(--text-secondary))] transition;
+}
+
+.segment-option.is-active {
+  @apply border-[rgba(193,117,79,0.4)] bg-[rgba(193,117,79,0.08)] text-[rgb(var(--text-primary))];
+}
+
+.segment-option input {
+  @apply h-4 w-4 border-[rgba(255,255,255,0.18)] bg-transparent;
+}
+
+.segment-intro {
+  @apply border-t border-[rgba(255,255,255,0.08)] pt-5;
+}
+
+.contact-form {
+  @apply space-y-5;
+}
+
+.contact-grid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.consent-field {
+  @apply flex items-start gap-3 rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)] p-4 text-sm leading-6 text-[rgb(var(--text-secondary))];
+}
+
+.consent-field input {
+  @apply mt-1 h-4 w-4 rounded border-[rgba(255,255,255,0.18)];
+}

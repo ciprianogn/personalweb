@@ -1,0 +1,50 @@
+.about-hero {
+  @apply items-start gap-10;
+}
+
+.about-quote {
+  @apply border-l border-[rgba(255,255,255,0.08)] pl-6;
+}
+
+.about-quote-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  @apply mt-4 text-[2.3rem] font-semibold leading-[0.96] text-[rgb(var(--text-primary))];
+}
+
+.about-story-grid {
+  @apply grid gap-6 lg:grid-cols-2;
+}
+
+.about-story-copy {
+  @apply text-base leading-8 text-[rgb(var(--text-secondary))];
+}
+
+.about-timeline {
+  @apply mt-10 grid gap-4;
+}
+
+.about-timeline li {
+  @apply grid gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4 md:grid-cols-[3rem_1fr];
+}
+
+.about-timeline span,
+.manifesto-index {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[rgba(255,255,255,0.12)] text-xs text-[rgb(var(--text-secondary))];
+}
+
+.about-timeline p {
+  @apply text-base leading-8 text-[rgb(var(--text-secondary))];
+}
+
+.manifesto-list {
+  @apply mt-10 grid gap-4;
+}
+
+.manifesto-item {
+  @apply grid gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4 md:grid-cols-[3rem_1fr];
+}
+
+.about-bridge {
+  @apply grid gap-6 lg:grid-cols-2;
+}

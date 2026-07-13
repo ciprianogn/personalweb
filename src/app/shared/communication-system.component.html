@@ -1,0 +1,47 @@
+<section class="space-y-8">
+  <div class="section-heading">
+    <p class="section-eyebrow">Comunicación como sistema</p>
+    <h2 class="section-title">{{ title() }}</h2>
+    @if (description()) {
+      <p class="section-description">{{ description() }}</p>
+    }
+  </div>
+
+  <div class="flow-shell">
+    <div class="flow-rail" role="tablist" aria-label="Etapas del sistema de comunicación">
+      @for (stage of stages(); track stage.id; let index = $index) {
+        <button
+          type="button"
+          class="flow-stage"
+          role="tab"
+          [id]="'flow-tab-' + stage.id"
+          [attr.aria-selected]="activeIndex() === index"
+          [attr.aria-controls]="'flow-panel-' + stage.id"
+          [class.is-active]="activeIndex() === index"
+          (click)="setActive(index)"
+          (keydown.arrowright)="move(1)"
+          (keydown.arrowleft)="move(-1)"
+        >
+          <span class="flow-index">{{ index + 1 }}</span>
+          <span class="flow-label">
+            <strong>{{ stage.label }}</strong>
+            <small>{{ stage.summary }}</small>
+          </span>
+        </button>
+      }
+    </div>
+
+    @if (stages()[activeIndex()]; as activeStage) {
+      <div
+        class="flow-detail"
+        role="tabpanel"
+        [id]="'flow-panel-' + activeStage.id"
+        [attr.aria-labelledby]="'flow-tab-' + activeStage.id"
+      >
+        <p class="section-eyebrow">{{ activeStage.eyebrow }}</p>
+        <h3 class="flow-detail-title">{{ activeStage.label }}</h3>
+        <p class="flow-detail-copy">{{ activeStage.detail }}</p>
+      </div>
+    }
+  </div>
+</section>

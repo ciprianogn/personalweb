@@ -1,0 +1,80 @@
+.experience-hero {
+  @apply space-y-6;
+}
+
+.experience-layout {
+  @apply grid gap-8 xl:grid-cols-[1fr_0.34fr];
+}
+
+.experience-timeline {
+  @apply grid gap-6;
+}
+
+.timeline-item {
+  @apply grid gap-5 border-b border-[rgba(255,255,255,0.08)] pb-6 lg:grid-cols-[12rem_1fr];
+}
+
+.timeline-period {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply space-y-2 text-[0.72rem] uppercase tracking-[0.18em] text-[rgb(var(--text-muted))];
+}
+
+.timeline-period small {
+  @apply block text-[0.72rem] normal-case tracking-normal;
+}
+
+.timeline-body {
+  @apply space-y-3;
+}
+
+.experience-aside {
+  @apply grid gap-6 self-start xl:sticky xl:top-[7.5rem];
+}
+
+.quick-links {
+  @apply mt-4 grid gap-3 text-sm text-[rgb(var(--text-secondary))];
+}
+
+.quick-links a {
+  @apply border-b border-[rgba(255,255,255,0.08)] pb-3 hover:text-[rgb(var(--text-primary))];
+}
+
+.capability-grid {
+  @apply mt-10 grid gap-6 lg:grid-cols-2;
+}
+
+.capability-card {
+  @apply space-y-4;
+}
+
+.stack-grid {
+  @apply mt-10 grid gap-6 lg:grid-cols-3;
+}
+
+.stack-card {
+  @apply space-y-4;
+}
+
+.education-list {
+  @apply mt-10 grid gap-4;
+}
+
+.education-item {
+  @apply grid gap-4 border-b border-[rgba(255,255,255,0.08)] pb-4 md:grid-cols-[6rem_1fr];
+}
+
+.education-period {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-[0.72rem] uppercase tracking-[0.18em] text-[rgb(var(--text-muted))];
+}
+
+@media print {
+  .experience-aside {
+    position: static !important;
+  }
+
+  .timeline-item,
+  .education-item {
+    page-break-inside: avoid;
+  }
+}
