@@ -1,173 +1,238 @@
-.hero-layout {
-  @apply items-center gap-10;
+.home-page {
+  min-width: 0;
+}
+
+.home-hero {
+  @apply pb-0 pt-4 md:pt-8;
+}
+
+.home-hero-grid {
+  @apply grid min-w-0 items-end gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(20rem,0.62fr)];
+}
+
+.home-hero-copy,
+.home-portrait-column {
+  @apply min-w-0;
 }
 
 .hero-signal {
-  @apply max-w-max;
+  @apply mb-8 w-fit max-w-full;
 }
 
 .hero-signal-copy {
   font-family: 'IBM Plex Mono', monospace;
-  @apply relative pl-3 text-[0.72rem] uppercase tracking-[0.2em] text-[rgb(var(--text-secondary))];
+  @apply min-w-0 pl-3 text-[0.68rem] uppercase tracking-[0.18em] text-[rgb(var(--text-secondary))];
 }
 
-.hero-gridline {
-  @apply border-t border-[rgba(255,255,255,0.08)] pt-5;
-}
-
-.hero-gridline-label {
-  font-family: 'IBM Plex Mono', monospace;
-  @apply text-[0.72rem] uppercase tracking-[0.22em] text-[rgb(var(--text-muted))];
-}
-
-.hero-visual {
-  @apply relative;
-}
-
-.hero-frame {
-  @apply grid gap-4;
-}
-
-.hero-portrait {
-  @apply overflow-hidden rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.03)] p-3;
-}
-
-.hero-portrait img {
-  @apply aspect-[4/5] w-full rounded-sm object-cover object-center;
-}
-
-.hero-aside {
-  @apply ml-auto max-w-[18rem] border-l border-[rgba(255,255,255,0.08)] pl-5;
-}
-
-.hero-aside-title {
+.home-title {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  @apply mt-2 text-[2rem] font-semibold leading-[0.94] text-[rgb(var(--text-primary))];
+  overflow-wrap: anywhere;
+  @apply max-w-[13ch] text-[3.15rem] font-semibold leading-[0.88] tracking-[-0.035em] text-[rgb(var(--text-primary))] sm:text-[4.7rem] lg:text-[6.2rem];
 }
 
-.hero-aside-copy {
-  @apply mt-3 text-sm leading-7 text-[rgb(var(--text-secondary))];
+.home-intro {
+  @apply mt-7 max-w-2xl text-lg leading-8 text-[rgb(var(--text-secondary))] md:text-xl;
 }
 
-.context-bar {
-  @apply flex flex-wrap gap-3 border-y border-[rgba(255,255,255,0.08)] py-4;
-}
-
-.context-item {
-  font-family: 'IBM Plex Mono', monospace;
-  @apply text-[0.74rem] uppercase tracking-[0.16em] text-[rgb(var(--text-secondary))];
-}
-
-.context-item::after {
-  content: '•';
-  @apply ml-3 text-[rgb(var(--accent-400))];
-}
-
-.context-item:last-child::after {
-  content: '';
-  margin-left: 0;
-}
-
-.mission-home-grid {
-  @apply mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr];
-}
-
-.mission-primary,
-.mission-secondary {
-  @apply space-y-5;
-}
-
-.mission-title,
-.experience-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  @apply text-[2.2rem] font-semibold leading-[0.94] text-[rgb(var(--text-primary))];
-}
-
-.mission-copy,
-.experience-copy,
-.mission-context,
-.mission-learning {
-  @apply text-base leading-8 text-[rgb(var(--text-secondary))];
-}
-
-.mission-learning {
-  @apply border-t border-[rgba(255,255,255,0.08)] pt-4;
-}
-
-.experience-preview {
-  @apply space-y-10;
-}
-
-.experience-preview-grid {
-  @apply grid gap-6 lg:grid-cols-[1fr_0.72fr];
-}
-
-.experience-meta {
-  font-family: 'IBM Plex Mono', monospace;
-  @apply flex flex-wrap gap-4 text-[0.72rem] uppercase tracking-[0.2em] text-[rgb(var(--text-muted))];
-}
-
-.experience-company {
-  @apply mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-[rgb(var(--accent-300))];
-}
-
-.preview-actions {
+.home-hero-copy .button-row {
   @apply mt-8;
 }
 
-.ecosystem-grid {
-  @apply mt-10 grid gap-6 lg:grid-cols-2;
+.home-portrait {
+  @apply overflow-hidden rounded-sm border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.02)] p-2;
 }
 
-.ecosystem-panel {
-  @apply rounded-sm border p-6 md:p-8;
+.home-portrait img {
+  @apply aspect-[4/5] w-full rounded-sm object-cover object-center grayscale-[0.15];
 }
 
-.ecosystem-panel-tech {
-  @apply border-[rgba(193,117,79,0.24)] bg-[rgba(193,117,79,0.06)];
+.portrait-note {
+  @apply grid gap-2 border-x border-b border-[rgba(255,255,255,0.08)] px-4 py-4 sm:grid-cols-[auto_1fr] sm:items-start sm:gap-5;
 }
 
-.ecosystem-panel-editorial {
-  @apply border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.02)];
+.portrait-note span {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-[0.64rem] uppercase tracking-[0.18em] text-[rgb(var(--accent-400))];
 }
 
-.home-content-grid {
-  @apply mt-10 grid gap-6 lg:grid-cols-[1.1fr_0.9fr];
+.portrait-note p {
+  @apply text-sm leading-6 text-[rgb(var(--text-secondary))];
 }
 
-.home-featured-article {
-  @apply space-y-5;
+.proof-rail {
+  @apply mt-12 grid border-y border-[rgba(255,255,255,0.09)] sm:grid-cols-2 lg:grid-cols-5;
 }
 
-.home-featured-image {
-  @apply aspect-[16/10] w-full rounded-sm border border-[rgba(255,255,255,0.08)] object-cover;
+.proof-item {
+  @apply grid min-w-0 grid-cols-[auto_1fr] gap-3 border-b border-[rgba(255,255,255,0.08)] px-3 py-4 sm:border-r lg:border-b-0;
 }
 
-.content-side-list {
-  @apply space-y-6;
+.proof-item:last-child {
+  @apply border-r-0;
 }
 
-.content-theme-list {
-  @apply border-b border-[rgba(255,255,255,0.08)] pb-5;
+.proof-item span {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-[0.62rem] text-[rgb(var(--accent-400))];
 }
 
-.content-list-item {
-  @apply border-b border-[rgba(255,255,255,0.08)] pb-5;
+.proof-item p {
+  @apply text-xs uppercase leading-5 tracking-[0.1em] text-[rgb(var(--text-secondary))];
 }
 
-.content-list-item:last-of-type {
-  @apply border-b-0 pb-0;
+.home-section {
+  @apply border-b border-[rgba(255,255,255,0.08)];
 }
 
-.content-list-title {
+.section-intro-grid {
+  @apply grid min-w-0 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,0.62fr)] lg:items-end;
+}
+
+.work-list {
+  @apply mt-12 border-t border-[rgba(255,255,255,0.1)];
+}
+
+.work-item {
+  @apply grid min-w-0 gap-5 border-b border-[rgba(255,255,255,0.08)] py-8 md:grid-cols-[3rem_minmax(12rem,0.7fr)_minmax(0,1fr)] md:gap-8;
+}
+
+.work-index {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-xs text-[rgb(var(--accent-400))];
+}
+
+.work-heading h3,
+.experience-feature h2,
+.experience-feature h3,
+.ecosystem-link h3,
+.home-contact h2 {
   font-family: 'Cormorant Garamond', Georgia, serif;
-  @apply mt-3 text-[1.8rem] font-semibold leading-[0.96] text-[rgb(var(--text-primary))];
+  @apply text-[2.1rem] font-semibold leading-[0.95] text-[rgb(var(--text-primary))];
 }
 
-.content-list-copy {
-  @apply mt-3 text-sm leading-7 text-[rgb(var(--text-secondary))];
+.work-heading h3 {
+  @apply mt-3 text-[2.5rem];
 }
 
-.cta-split {
-  @apply grid gap-6 lg:grid-cols-2;
+.work-body > p {
+  @apply text-base leading-7 text-[rgb(var(--text-secondary))];
+}
+
+.work-body ul {
+  @apply my-5 grid gap-2;
+}
+
+.work-body li {
+  @apply relative pl-4 text-sm leading-6 text-[rgb(var(--text-secondary))];
+}
+
+.work-body li::before {
+  content: '—';
+  @apply absolute left-0 text-[rgb(var(--accent-400))];
+}
+
+.leadership-section {
+  @apply relative;
+}
+
+.leadership-grid {
+  @apply mt-12 grid gap-px overflow-hidden rounded-sm border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.08)] lg:grid-cols-3;
+}
+
+.leadership-card {
+  @apply bg-[rgb(var(--bg-950))] p-6 md:p-8;
+}
+
+.leadership-card > span {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-xs text-[rgb(var(--accent-400))];
+}
+
+.leadership-card h3 {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  @apply mt-12 text-[2rem] font-semibold leading-none;
+}
+
+.leadership-card p {
+  @apply mt-4 text-sm leading-7 text-[rgb(var(--text-secondary))];
+}
+
+.experience-feature {
+  @apply grid overflow-hidden rounded-sm border border-[rgba(193,117,79,0.24)] bg-[rgba(193,117,79,0.055)] lg:grid-cols-[minmax(0,1.25fr)_minmax(18rem,0.75fr)];
+}
+
+.experience-feature-main,
+.experience-feature-aside {
+  @apply p-6 md:p-10;
+}
+
+.experience-feature-main > h2 {
+  @apply mt-4 max-w-3xl text-[2.8rem] md:text-[3.8rem];
+}
+
+.experience-feature-main > p {
+  @apply mt-6 max-w-2xl text-base leading-8 text-[rgb(var(--text-secondary))];
+}
+
+.experience-feature-main .button-row {
+  @apply mt-8;
+}
+
+.experience-feature-aside {
+  @apply border-t border-[rgba(255,255,255,0.08)] bg-[rgba(0,0,0,0.12)] lg:border-l lg:border-t-0;
+}
+
+.experience-feature-aside h3 {
+  @apply mt-8;
+}
+
+.experience-feature-aside .label-stack {
+  @apply mt-8;
+}
+
+.ecosystem-links {
+  @apply mt-10 grid gap-4 lg:grid-cols-2;
+}
+
+.ecosystem-link {
+  @apply grid min-w-0 grid-cols-[auto_1fr_auto] gap-5 rounded-sm border border-[rgba(255,255,255,0.08)] p-6 hover:border-[rgba(193,117,79,0.35)] hover:bg-[rgba(193,117,79,0.04)] md:p-8;
+}
+
+.ecosystem-link > span {
+  font-family: 'IBM Plex Mono', monospace;
+  @apply text-xs text-[rgb(var(--accent-400))];
+}
+
+.ecosystem-link h3 {
+  @apply mt-3;
+}
+
+.ecosystem-link p:last-child {
+  @apply mt-4 text-sm leading-7 text-[rgb(var(--text-secondary))];
+}
+
+.ecosystem-link strong {
+  @apply font-normal text-[rgb(var(--accent-400))];
+}
+
+.home-contact {
+  @apply pb-20 md:pb-28;
+}
+
+.home-contact h2 {
+  @apply mt-5 max-w-5xl text-[3rem] md:text-[4.5rem];
+}
+
+.home-contact .button-row {
+  @apply mt-8;
+}
+
+@media (max-width: 639px) {
+  .hero-signal-copy {
+    letter-spacing: 0.1em;
+  }
+
+  .proof-item:nth-child(even) {
+    border-right: 0;
+  }
 }

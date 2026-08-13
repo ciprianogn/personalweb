@@ -9,11 +9,19 @@
 
     <div class="button-row page-print-hidden">
       <a class="button-primary" [href]="cvPath" download>Descargar CV</a>
-      <a class="button-secondary" [href]="site.linkedinUrl" target="_blank" rel="noopener noreferrer">Ver LinkedIn</a>
+      <a
+        class="button-secondary"
+        [href]="site.linkedinUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Ver LinkedIn</a
+      >
       <a class="button-secondary" routerLink="/contacto">Contactarme</a>
     </div>
 
-    <p class="page-print-note page-print-hidden">Versión pensada para recruiters, equipos de producto y colaboraciones técnicas.</p>
+    <p class="page-print-note page-print-hidden">
+      Versión pensada para recruiters, equipos de producto y colaboraciones técnicas.
+    </p>
   </section>
 
   <section class="section">
@@ -48,7 +56,7 @@
 
       <aside class="experience-aside">
         <article class="panel-strong">
-          <p class="section-eyebrow">Servicio y misión</p>
+          <p class="section-eyebrow">Cómo aporto</p>
           <ul class="data-list">
             @for (item of site.experiencePage.serviceContexts; track item) {
               <li>{{ item }}</li>
@@ -62,7 +70,9 @@
             <a [href]="cvPath" download>Descargar CV en PDF</a>
             <a [href]="site.linkedinUrl" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             <a [href]="site.githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a [href]="'mailto:' + site.email" target="_blank" rel="noopener noreferrer">Email directo</a>
+            <a [href]="'mailto:' + site.email" target="_blank" rel="noopener noreferrer"
+              >Email directo</a
+            >
           </div>
         </article>
       </aside>

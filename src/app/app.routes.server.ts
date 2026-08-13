@@ -5,16 +5,21 @@ interface PrerenderPost {
 }
 
 async function getContentSlugs(): Promise<Array<{ slug: string }>> {
-  const response = await fetch(
-    'https://prichelco.com.ar/blogs/wp-json/wp/v2/posts?categories=2&per_page=100&_fields=slug',
-  );
+  try {
+    const response = await fetch(
+      'https://prichelco.com.ar/blogs/wp-json/wp/v2/posts?categories=2&per_page=100&_fields=slug',
+    );
+    const contentType = response.headers.get('content-type') ?? '';
 
-  if (!response.ok) {
+    if (!response.ok || !contentType.includes('application/json')) {
+      return [];
+    }
+
+    const posts = (await response.json()) as PrerenderPost[];
+    return posts.map((post) => ({ slug: post.slug }));
+  } catch {
     return [];
   }
-
-  const posts = (await response.json()) as PrerenderPost[];
-  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export const serverRoutes: ServerRoute[] = [
@@ -27,8 +32,12 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Prerender,
   },
   {
-    path: 'comunicacion-y-mision',
+    path: 'proyectos',
     renderMode: RenderMode.Prerender,
+  },
+  {
+    path: 'comunicacion-y-mision',
+    renderMode: RenderMode.Client,
   },
   {
     path: 'experiencia',
@@ -40,7 +49,7 @@ export const serverRoutes: ServerRoute[] = [
   },
   {
     path: 'contenido',
-    renderMode: RenderMode.Prerender,
+    renderMode: RenderMode.Client,
   },
   {
     path: 'contenido/:slug',

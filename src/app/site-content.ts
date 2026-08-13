@@ -18,7 +18,7 @@ export interface FlowStage {
   detail: string;
 }
 
-export interface MissionCase {
+export interface SelectedCase {
   eyebrow: string;
   title: string;
   description: string;
@@ -66,43 +66,40 @@ export const siteConfig = {
   siteName: 'Cipriano Gorosito',
   siteUrl: 'https://cipriano.prichelco.com.ar',
   defaultOgImage: '/assets/img/og-image.jpg',
-  tagline: 'Comunicación, creatividad y tecnología al servicio de la misión.',
-  shortTagline: 'Estrategia, software y misión',
+  tagline: 'Producto, tecnología y liderazgo para resolver problemas reales.',
+  shortTagline: 'Producto · Tecnología · Liderazgo',
   description:
-    'Estrategia, contenido, software y sistemas digitales para iglesias, proyectos, marcas y equipos que necesitan comunicar y construir con propósito.',
+    'Desarrollo productos y sistemas digitales, conectando necesidades operativas, decisiones técnicas y equipos para llevar soluciones a producción.',
   location: 'Buenos Aires, Argentina',
   email: 'ciprianongorosito@gmail.com',
   phoneDisplay: '+54 9 11 2817 3122',
   whatsappUrl: 'https://wa.me/541128173122?text=Hola%20Cipriano',
   linkedinUrl: 'https://ar.linkedin.com/in/ciprianogn',
-  githubUrl: 'https://github.com/Cipriano26',
+  githubUrl: 'https://github.com/ciprianogn',
   cvDownloadPath: '/assets/files/cipriano-gorosito-cv.pdf',
   navigation: [
     { label: 'Inicio', path: '/' },
-    { label: 'Mi enfoque', path: '/sobre-mi' },
-    { label: 'Comunicación y misión', path: '/comunicacion-y-mision' },
+    { label: 'Perfil', path: '/sobre-mi' },
+    { label: 'Proyectos', path: '/proyectos' },
     { label: 'Experiencia', path: '/experiencia' },
-    { label: 'Contenido', path: '/contenido' },
     { label: 'Contacto', path: '/contacto' },
   ] satisfies NavItem[],
   socialLinks: [
     { label: 'LinkedIn', url: 'https://ar.linkedin.com/in/ciprianogn', external: true },
-    { label: 'GitHub', url: 'https://github.com/Cipriano26', external: true },
-    { label: 'Instagram', url: 'https://www.instagram.com/ciprianogn/', external: true },
-    { label: 'YouTube', url: 'https://www.youtube.com/@ciprianogn', external: true },
+    { label: 'GitHub', url: 'https://github.com/ciprianogn', external: true },
   ] satisfies LinkItem[],
   hero: {
-    eyebrow: 'Comunicación · Creatividad · Tecnología · Misión',
-    title: 'Construyo comunicación que sirve. Y sistemas que la sostienen.',
+    eyebrow: 'Producto · Tecnología · Sistemas',
+    title: 'Convierto problemas complejos en soluciones que funcionan.',
     description:
-      'Estrategia, contenido y tecnología para iglesias, proyectos misioneros, marcas y equipos que necesitan convertir una idea con propósito en una experiencia real.',
-    primaryCta: { label: 'Conocer mi enfoque', path: '/sobre-mi' },
-    secondaryCta: { label: 'Ver experiencia y CV', path: '/experiencia' },
+      'Trabajo entre negocio y tecnología: entiendo la necesidad, ordeno decisiones y construyo productos digitales que llegan a producción.',
+    primaryCta: { label: 'Ver experiencia', path: '/experiencia' },
+    secondaryCta: { label: 'Explorar proyectos', path: '/proyectos' },
     contextBar: [
-      'Desarrollo de software y producto',
-      'Comunicación estratégica',
-      'Dirección de comunicaciones',
-      'Sistemas digitales',
+      'Software y producto',
+      'Análisis funcional',
+      'Integraciones y automatización',
+      'Coordinación entre áreas',
       'Buenos Aires, Argentina',
     ],
   },
@@ -112,8 +109,7 @@ export const siteConfig = {
       label: 'Propósito',
       eyebrow: 'Punto de partida',
       summary: 'Todo empieza por aclarar para qué existe la iniciativa.',
-      detail:
-        'Ordeno la misión, el problema y la dirección antes de hablar de piezas, canales o tecnología.',
+      detail: 'Ordeno el problema y la dirección antes de hablar de herramientas o implementación.',
     },
     {
       id: 'strategy',
@@ -156,48 +152,86 @@ export const siteConfig = {
         'Cada sistema necesita feedback, documentación y ajustes para crecer con criterio, no solo con intensidad.',
     },
   ] satisfies FlowStage[],
-  missionCases: [
+  selectedWork: [
     {
-      eyebrow: 'Dirección y estrategia aplicada',
-      title: 'Iglesia Dominico',
+      eyebrow: 'Producto interno · Operación',
+      title: 'Via Bariloche',
       description:
-        'Una experiencia integral de comunicación, equipos y herramientas digitales al servicio de una comunidad real.',
+        'Evolución de sistemas internos para acompañar necesidades operativas concretas.',
       context:
-        'La comunicación funciona como puerta de entrada, acompañamiento pastoral y soporte operativo para campañas, cultos, eventos y procesos internos.',
+        'Trabajo cerca de las áreas usuarias para traducir problemas, definir alcance y llevar mejoras desde el análisis hasta la implementación.',
       contribution: [
-        'Dirección y estrategia de comunicaciones',
-        'Planificación de campañas, streaming y contenido',
-        'Organización de equipos, procesos y herramientas digitales',
-        'Capacitación técnica y mirada misionera de largo plazo',
+        'Análisis de necesidades y definición de soluciones',
+        'Desarrollo y evolución de herramientas internas',
+        'Integración entre procesos, datos y áreas',
+        'Automatización y mejora continua',
       ],
       learning:
-        'La misión se fortalece cuando mensaje, operación, tecnología y personas dejan de trabajar por separado.',
-      url: 'https://www.instagram.com/iglesiadominico/',
-      cta: 'Conocer Iglesia Dominico',
+        'Una solución técnica genera valor cuando entiende la operación y puede sostenerse después de la primera entrega.',
+      url: '/experiencia',
+      cta: 'Ver experiencia',
     },
     {
-      eyebrow: 'Narrativa, experimentación y aprendizaje público',
-      title: 'Wenumew',
+      eyebrow: 'Productos propios · Implementación',
+      title: 'Prichelco',
       description:
-        'Un espacio personal de reflexión cristiana, contenido breve y exploración creativa que estoy reconstruyendo durante 2026.',
+        'Un espacio de construcción de software, automatizaciones e integraciones orientadas a problemas concretos.',
       context:
-        'Funciona como laboratorio para probar formatos, ritmos de publicación y una comunicación más humana, breve y honesta.',
+        'Me permite recorrer el ciclo completo: descubrir una necesidad, diseñar la solución, construirla y ponerla en funcionamiento.',
       contribution: [
-        'Narrativa cristiana con tono cercano',
-        'Video y contenido breve con intención editorial',
-        'Exploración de formatos y aprendizajes públicos',
-        'Reconstrucción del proyecto con mayor foco y sistema',
+        'Arquitectura y desarrollo de aplicaciones web',
+        'Sistemas administrativos y productos digitales',
+        'APIs, integraciones y automatización',
+        'Despliegue, soporte y evolución',
       ],
       learning:
-        'La creatividad también necesita estructura para sostener un mensaje y no quedarse en intuiciones sueltas.',
-      url: 'https://www.instagram.com/wenumew/',
-      cta: 'Conocer Wenumew',
+        'Construir de punta a punta obliga a tomar mejores decisiones de producto, no solamente decisiones de código.',
+      url: 'https://prichelco.com.ar/',
+      cta: 'Conocer Prichelco',
     },
-  ] satisfies MissionCase[],
+    {
+      eyebrow: 'Dirección · Equipos · Operación digital',
+      title: 'Comunicación y sistemas',
+      description:
+        'Experiencia coordinando personas, herramientas y procesos en contextos con múltiples frentes de trabajo.',
+      context:
+        'Planificación, seguimiento, documentación y transferencia para transformar iniciativas dispersas en una operación más clara.',
+      contribution: [
+        'Coordinación de equipos y responsables',
+        'Diseño de procesos y herramientas de trabajo',
+        'Capacitación y transferencia de conocimiento',
+        'Planificación y seguimiento de entregas',
+      ],
+      learning:
+        'Liderar también es construir el contexto para que otras personas puedan decidir, ejecutar y sostener el trabajo.',
+      url: '/sobre-mi',
+      cta: 'Conocer mi forma de trabajar',
+    },
+  ] satisfies SelectedCase[],
+  leadershipPrinciples: [
+    {
+      index: '01',
+      title: 'Entender antes de construir',
+      description:
+        'Bajo la ambigüedad a decisiones concretas: problema, alcance, prioridad y criterio de éxito.',
+    },
+    {
+      index: '02',
+      title: 'Conectar áreas',
+      description:
+        'Traduzco necesidades operativas y decisiones técnicas para que el trabajo avance con menos fricción.',
+    },
+    {
+      index: '03',
+      title: 'Dejar capacidad instalada',
+      description:
+        'Documento, transfiero y diseño soluciones que puedan mantenerse sin depender de una sola persona.',
+    },
+  ],
   homeExperience: {
-    title: 'También construyo software y productos dentro de contextos reales.',
+    title: 'Experiencia en contextos donde el software sostiene la operación.',
     summary:
-      'Mi recorrido profesional combina análisis, desarrollo, producto, implementación, automatización y comunicación entre áreas. Entro al problema desde la necesidad y acompaño hasta la solución funcionando.',
+      'Combino análisis, desarrollo e implementación. No entro solamente por el código: trabajo sobre la necesidad, las decisiones y la adopción de la solución.',
     currentRole: {
       period: '2022 - Actualidad',
       title: 'Desarrollo de software y producto',
@@ -212,7 +246,16 @@ export const siteConfig = {
         'Comunicación de propuestas técnicas entre áreas',
       ],
     },
-    stackPreview: ['Angular', 'TypeScript', 'PHP', 'APIs', 'MySQL', 'SQL Server', 'Linux', 'Automatización'],
+    stackPreview: [
+      'Angular',
+      'TypeScript',
+      'PHP',
+      'APIs',
+      'MySQL',
+      'SQL Server',
+      'Linux',
+      'Automatización',
+    ],
   },
   ecosystem: [
     {
@@ -224,7 +267,12 @@ export const siteConfig = {
       cta: 'Ver productos y proyectos en Prichelco',
       external: true,
       ariaLabel: 'Ver productos y proyectos en Prichelco, sitio externo',
-      details: ['Productos digitales', 'Sistemas administrativos', 'Automatización', 'Integraciones'],
+      details: [
+        'Productos digitales',
+        'Sistemas administrativos',
+        'Automatización',
+        'Integraciones',
+      ],
     },
     {
       eyebrow: 'Estrategia, identidad y contenido',
@@ -235,41 +283,44 @@ export const siteConfig = {
       cta: 'Ver trabajos creativos en Yateino',
       external: true,
       ariaLabel: 'Ver trabajos creativos en Yateino, sitio externo',
-      details: ['Identidad y sistemas visuales', 'Contenido', 'Dirección creativa', 'Estrategia de marca'],
+      details: [
+        'Identidad y sistemas visuales',
+        'Contenido',
+        'Dirección creativa',
+        'Estrategia de marca',
+      ],
     },
-  ] satisfies Array<
-    {
-      eyebrow: string;
-      title: string;
-      description: string;
-      url: string;
-      cta: string;
-      external: boolean;
-      ariaLabel: string;
-      details: string[];
-    }
-  >,
+  ] satisfies Array<{
+    eyebrow: string;
+    title: string;
+    description: string;
+    url: string;
+    cta: string;
+    external: boolean;
+    ariaLabel: string;
+    details: string[];
+  }>,
   aboutPage: {
-    title: 'Conecto estrategia, creatividad y tecnología dentro de un mismo sistema.',
+    title: 'Trabajo donde los problemas de negocio se encuentran con la tecnología.',
     intro:
-      'No llegué a este enfoque sumando etiquetas. Llegué trabajando en problemas donde el mensaje, los procesos, los equipos y las herramientas estaban conectados aunque la organización todavía no lo viera así.',
+      'Mi perfil combina desarrollo, análisis y coordinación. Me interesa entender qué está frenando a un equipo y convertirlo en una solución concreta.',
     narrative: [
-      'Empecé construyendo desde la tecnología, pero con el tiempo entendí que una buena solución rara vez se resuelve solo con código. Necesita criterio, narrativa, orden y una lectura honesta del contexto.',
-      'Por eso hoy trabajo entre comunicación, producto y sistemas. Puedo pensar una estrategia, traducirla en experiencia, construir la herramienta y acompañar la operación para que siga funcionando.',
+      'Empecé desde el desarrollo y aprendí que una buena solución rara vez se resuelve solamente con código. También necesita contexto, prioridades y una lectura honesta de la operación.',
+      'Hoy puedo moverme entre una conversación funcional, una decisión de producto y la implementación técnica. Ese cruce es donde más valor aporto.',
     ],
     timeline: [
-      'Tecnología como punto de entrada',
-      'Comunicación como sistema, no como publicación',
-      'Misión como criterio para decidir qué construir y cómo sostenerlo',
+      'Desarrollo como punto de entrada',
+      'Análisis para convertir ambigüedad en alcance',
+      'Producto y liderazgo para sostener la solución',
     ],
     principles: [
       {
-        title: 'Empiezo por el propósito.',
+        title: 'Primero entiendo el problema.',
         description:
-          'Si no está claro qué se quiere servir, ninguna herramienta ni ninguna campaña alcanzan.',
+          'Antes de elegir una herramienta, necesito saber qué cambia para la persona o el proceso que la va a usar.',
       },
       {
-        title: 'La estrategia ordena el entusiasmo.',
+        title: 'La prioridad ordena el trabajo.',
         description:
           'Prefiero procesos sostenibles antes que ráfagas intensas que después nadie puede continuar.',
       },
@@ -279,9 +330,9 @@ export const siteConfig = {
           'Construyo sistemas para liberar energía, no para agregar capas de complejidad innecesaria.',
       },
       {
-        title: 'La forma también comunica.',
+        title: 'La experiencia también es parte del producto.',
         description:
-          'El diseño, la estructura y la experiencia son parte del mensaje y de la confianza que genera.',
+          'El diseño, la estructura y los estados de una interfaz determinan si una solución se entiende o se abandona.',
       },
       {
         title: 'Trabajo para que las cosas sigan.',
@@ -291,66 +342,54 @@ export const siteConfig = {
     ],
   },
   missionPage: {
-    title: 'La misión necesita algo más que publicaciones sueltas.',
+    title: 'Proyectos donde análisis, producto y tecnología trabajan juntos.',
     intro:
-      'Cuando la comunicación se reduce a piezas aisladas, el mensaje se fragmenta, los equipos se desgastan y la tecnología se vuelve un parche. Mi enfoque busca ordenar todo ese sistema.',
+      'No separo el problema de su implementación. Cada proyecto empieza por entender el contexto y termina cuando la solución puede usarse, medirse y sostenerse.',
     layers: [
       {
-        title: 'Propósito',
-        description: 'Aclara para qué existe la iniciativa y qué quiere producir en la vida real.',
+        title: 'Contexto',
+        description: 'Entender quién usa la solución, qué proceso toca y qué restricción existe.',
       },
       {
-        title: 'Mensaje',
-        description: 'Define lo que debe ser entendido, recordado y transmitido con coherencia.',
+        title: 'Problema',
+        description: 'Separar síntomas de causas y definir qué vale la pena resolver primero.',
       },
       {
-        title: 'Audiencia',
-        description: 'Ayuda a comprender necesidades, lenguaje, hábitos y puntos de contacto.',
+        title: 'Alcance',
+        description: 'Convertir expectativas abiertas en decisiones, etapas y criterios claros.',
       },
       {
-        title: 'Estrategia',
-        description: 'Ordena prioridades, canales, etapas y criterios de decisión.',
+        title: 'Solución',
+        description: 'Diseñar el flujo, los datos y la arquitectura adecuados para el contexto.',
       },
       {
-        title: 'Identidad',
-        description: 'Le da forma visual, verbal y relacional al mensaje dentro del tiempo.',
+        title: 'Implementación',
+        description: 'Construir, integrar y validar sin perder de vista la necesidad original.',
       },
       {
-        title: 'Contenido',
-        description: 'Convierte la estrategia en piezas, series, campañas y recursos útiles.',
+        title: 'Adopción',
+        description: 'Acompañar a las personas que usan la herramienta y ajustar la experiencia.',
       },
       {
-        title: 'Canales',
-        description: 'Distribuye la experiencia sin depender de un solo medio o algoritmo.',
-      },
-      {
-        title: 'Tecnología',
-        description: 'Sostiene páginas, plataformas, automatizaciones y operación digital.',
-      },
-      {
-        title: 'Equipo',
-        description: 'Hace posible continuidad, roles claros y transferencia de trabajo.',
-      },
-      {
-        title: 'Medición y aprendizaje',
-        description: 'Permite ajustar, documentar y mejorar sin perder el sentido original.',
+        title: 'Evolución',
+        description: 'Medir, documentar y mejorar para que el producto no quede congelado.',
       },
     ],
     collaborationGroups: [
       {
-        title: 'Diagnosticar y ordenar',
-        description: 'Diagnóstico, estrategia, planificación y sistemas de comunicación.',
-        items: ['Diagnóstico de comunicación', 'Planificación', 'Estrategia', 'Sistemas de comunicación'],
+        title: 'Descubrir y ordenar',
+        description: 'Del problema abierto a un alcance que el equipo puede ejecutar.',
+        items: ['Análisis funcional', 'Mapeo de procesos', 'Priorización', 'Definición de alcance'],
       },
       {
-        title: 'Crear y producir',
-        description: 'Identidad, campañas, contenido, audiovisual y streaming.',
-        items: ['Identidad', 'Campañas', 'Contenido', 'Audiovisual', 'Streaming'],
+        title: 'Diseñar y construir',
+        description: 'Producto, experiencia e implementación técnica dentro del mismo proceso.',
+        items: ['Diseño de solución', 'Frontend', 'Backend', 'APIs e integraciones'],
       },
       {
         title: 'Construir y sostener',
-        description: 'Páginas, plataformas, automatización, equipos y productos digitales.',
-        items: ['Páginas', 'Plataformas', 'Automatización', 'Formación de equipos', 'Productos digitales'],
+        description: 'Operación, automatización y transferencia para asegurar continuidad.',
+        items: ['Automatización', 'Documentación', 'Capacitación', 'Mejora continua'],
       },
     ] satisfies CapabilityGroup[],
   },
@@ -405,14 +444,20 @@ export const siteConfig = {
       },
     ] satisfies TimelineEntry[],
     serviceContexts: [
-      'Iglesia Dominico como experiencia de dirección de comunicaciones, equipos y herramientas digitales con enfoque misionero.',
-      'Wenumew como laboratorio de reflexión cristiana, narrativa y experimentación de formatos.',
+      'Traducción de necesidades operativas a decisiones técnicas y de producto.',
+      'Coordinación de personas, etapas y herramientas para sostener la implementación.',
+      'Documentación, capacitación y transferencia para reducir dependencias.',
     ],
     capabilityGroups: [
       {
         title: 'Producto y análisis',
         description: 'Problemas, alcance, etapas, validación y criterios de solución.',
-        items: ['Análisis de necesidades', 'Definición de soluciones', 'Documentación', 'Mejora continua'],
+        items: [
+          'Análisis de necesidades',
+          'Definición de soluciones',
+          'Documentación',
+          'Mejora continua',
+        ],
       },
       {
         title: 'Frontend',
@@ -427,7 +472,12 @@ export const siteConfig = {
       {
         title: 'APIs e integraciones',
         description: 'Conexión entre sistemas, automatización y transferencia de datos.',
-        items: ['REST APIs', 'Integraciones con terceros', 'Documentación técnica', 'Procesos conectados'],
+        items: [
+          'REST APIs',
+          'Integraciones con terceros',
+          'Documentación técnica',
+          'Procesos conectados',
+        ],
       },
       {
         title: 'Bases de datos',
@@ -440,14 +490,14 @@ export const siteConfig = {
         items: ['Linux', 'Apache', 'Bash', 'Batch', 'Entornos de desarrollo y producción'],
       },
       {
-        title: 'Comunicación y estrategia',
-        description: 'Narrativa, organización de mensajes y lectura de audiencias.',
-        items: ['Estrategia de comunicación', 'Contenido', 'Identidad', 'Sistemas de comunicación'],
-      },
-      {
         title: 'Liderazgo y coordinación',
         description: 'Trabajo entre áreas, equipos y procesos.',
-        items: ['Coordinación cross-team', 'Capacitación técnica', 'Seguimiento de etapas', 'Transferencia'],
+        items: [
+          'Coordinación cross-team',
+          'Capacitación técnica',
+          'Seguimiento de etapas',
+          'Transferencia',
+        ],
       },
     ] satisfies CapabilityGroup[],
     stackGroups: [
@@ -458,13 +508,23 @@ export const siteConfig = {
       },
       {
         title: 'Backend, datos y APIs',
-        description: 'Herramientas con las que resuelvo lógica, datos y comunicación entre sistemas.',
+        description:
+          'Herramientas con las que resuelvo lógica, datos y comunicación entre sistemas.',
         items: ['PHP', 'Laravel', 'CodeIgniter', 'MySQL', 'SQL Server', 'REST APIs'],
       },
       {
         title: 'Operación y herramientas',
         description: 'Entornos, automatización y utilidades de trabajo.',
-        items: ['Linux', 'Apache', 'GitLab', 'Jira', 'Postman', 'WinSCP', 'Workbench', 'VirtualBox'],
+        items: [
+          'Linux',
+          'Apache',
+          'GitLab',
+          'Jira',
+          'Postman',
+          'WinSCP',
+          'Workbench',
+          'VirtualBox',
+        ],
       },
     ] satisfies StackGroup[],
     education: [
@@ -495,22 +555,21 @@ export const siteConfig = {
     ] satisfies EducationEntry[],
   },
   contentPage: {
-    title: 'Ideas sobre comunicación, misión y tecnología.',
+    title: 'Notas sobre producto, tecnología y trabajo real.',
     description:
-      'Un espacio editorial para publicar criterio, aprendizajes y tensiones reales entre estrategia, software, creatividad y servicio.',
+      'Aprendizajes de construir sistemas, tomar decisiones y trabajar con problemas que no llegan ordenados.',
     themes: [
-      { label: 'Comunicación cristiana', description: 'Mensaje, misión y comunidad.' },
-      { label: 'Estrategia', description: 'Prioridades, orden y sistema.' },
-      { label: 'Tecnología para la misión', description: 'Herramientas, procesos y plataformas.' },
-      { label: 'Creatividad', description: 'Narrativa, forma y experimentación.' },
-      { label: 'Producto', description: 'Soluciones, contexto y continuidad.' },
+      { label: 'Producto', description: 'Problemas, alcance y decisiones.' },
+      { label: 'Tecnología', description: 'Arquitectura, herramientas e implementación.' },
+      { label: 'Liderazgo', description: 'Claridad, coordinación y transferencia.' },
+      { label: 'Procesos', description: 'Operación, automatización y mejora.' },
       { label: 'Aprendizajes', description: 'Trabajo real, errores y criterio.' },
     ] satisfies ArticleTheme[],
   },
   contactPage: {
-    title: 'Abramos la conversación correcta para el tipo de trabajo que tenés en mente.',
+    title: 'Hablemos del problema, no solamente de la herramienta.',
     description:
-      'Trabajo con oportunidades profesionales, proyectos tecnológicos y procesos de comunicación con propósito. Prefiero separar bien cada intención para responder con contexto.',
+      'Estoy abierto a oportunidades profesionales, productos digitales y desafíos donde pueda conectar análisis, tecnología y equipos.',
     directChannels: [
       {
         title: 'Correo directo',
@@ -533,10 +592,9 @@ export const siteConfig = {
     ],
   },
   finalCta: {
-    missionTitle: '¿Hay un proyecto, una iglesia o una iniciativa que necesita orden, mensaje y sistema?',
-    missionText:
-      'Podemos conversar sobre estrategia, contenido, equipos, plataformas o cómo sostener mejor una comunicación con propósito.',
-    missionAction: { label: 'Conversar sobre un proyecto', path: '/contacto' },
+    missionTitle: '¿Hay un producto o proceso que necesita orden y una solución concreta?',
+    missionText: 'Podemos conversar sobre el contexto, las restricciones y el próximo paso útil.',
+    missionAction: { label: 'Contarme el problema', path: '/contacto' },
     careerTitle: '¿Querés evaluar mi recorrido para una oportunidad profesional?',
     careerText:
       'También podés ir directo a mi experiencia, ver mi CV y revisar dónde encaja mi perfil dentro de un equipo o producto.',

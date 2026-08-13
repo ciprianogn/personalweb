@@ -4,7 +4,7 @@ import { SeoService } from '../../seo.service';
 import { siteConfig } from '../../site-content';
 import { ContactService } from './contact.service';
 
-type ContactMode = 'career' | 'mission';
+type ContactMode = 'career' | 'project';
 
 @Component({
   selector: 'app-contact',
@@ -43,7 +43,7 @@ export class Contact implements OnInit {
     this.seo.update({
       title: 'Contacto | Cipriano Gorosito',
       description:
-        'Contacto segmentado para oportunidades profesionales, proyectos tecnológicos y comunicación con propósito.',
+        'Contacto para oportunidades profesionales y proyectos de producto, software, automatización e integración.',
       path: '/contacto',
       type: 'website',
     });
@@ -83,7 +83,7 @@ export class Contact implements OnInit {
             value.mensaje,
           ]
         : [
-            'Tipo de contacto: Proyecto o misión',
+            'Tipo de contacto: Proyecto digital',
             value.organization ? `Organización: ${value.organization}` : '',
             value.projectType ? `Tipo de proyecto: ${value.projectType}` : '',
             value.stage ? `Etapa actual: ${value.stage}` : '',

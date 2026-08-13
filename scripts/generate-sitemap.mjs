@@ -2,18 +2,28 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const siteUrl = 'https://cipriano.prichelco.com.ar';
-const staticRoutes = ['/', '/sobre-mi', '/comunicacion-y-mision', '/experiencia', '/contenido', '/contacto'];
+const staticRoutes = ['/', '/sobre-mi', '/proyectos', '/experiencia', '/contacto'];
 const endpoint =
   'https://prichelco.com.ar/blogs/wp-json/wp/v2/posts?categories=2&per_page=100&_fields=slug,modified';
 
 async function fetchPosts() {
-  const response = await fetch(endpoint);
+  try {
+    const response = await fetch(endpoint);
+    const contentType = response.headers.get('content-type') ?? '';
 
-  if (!response.ok) {
-    throw new Error(`No pude obtener artículos para el sitemap: ${response.status}`);
+    if (!response.ok || !contentType.includes('application/json')) {
+      console.warn('El CMS no devolvió JSON; el sitemap se generará solo con rutas estáticas.');
+      return [];
+    }
+
+    return response.json();
+  } catch (error) {
+    console.warn(
+      'No se pudo consultar el CMS; el sitemap se generará solo con rutas estáticas.',
+      error,
+    );
+    return [];
   }
-
-  return response.json();
 }
 
 function xmlUrl(url, lastmod) {

@@ -3,10 +3,11 @@
     <div class="space-y-4">
       <a class="brand-mark" routerLink="/">
         <span class="brand-mark-name">{{ siteName }}</span>
-        <span class="brand-mark-tag">Comunicación, creatividad y tecnología al servicio de la misión.</span>
+        <span class="brand-mark-tag">Producto · Tecnología · Liderazgo</span>
       </a>
       <p class="footer-copy">
-        Estrategia, contenido, software y sistemas digitales para proyectos, equipos e iniciativas que necesitan comunicar y construir con propósito.
+        Desarrollo productos y sistemas digitales conectando necesidades operativas, decisiones
+        técnicas y equipos.
       </p>
       <p class="footer-copy">Buenos Aires, Argentina</p>
     </div>
@@ -15,7 +16,9 @@
       <h2 class="footer-title">Navegación</h2>
       <ul class="footer-list">
         @for (item of navigation; track item.path) {
-          <li><a [routerLink]="item.path">{{ item.label }}</a></li>
+          <li>
+            <a [routerLink]="item.path">{{ item.label }}</a>
+          </li>
         }
         <li><a [href]="cvPath" download>Descargar CV</a></li>
       </ul>
@@ -24,13 +27,19 @@
     <div>
       <h2 class="footer-title">Canales</h2>
       <ul class="footer-list">
-        <li><a [href]="'mailto:' + email" target="_blank" rel="noopener noreferrer">{{ email }}</a></li>
-        <li><a href="https://prichelco.com.ar/" target="_blank" rel="noopener noreferrer">Prichelco</a></li>
-        <li><a href="https://yateino.com.ar/" target="_blank" rel="noopener noreferrer">Yateino</a></li>
+        <li>
+          <a [href]="'mailto:' + email" target="_blank" rel="noopener noreferrer">{{ email }}</a>
+        </li>
+        <li>
+          <a href="https://prichelco.com.ar/" target="_blank" rel="noopener noreferrer"
+            >Prichelco</a
+          >
+        </li>
+        <li>
+          <a href="https://yateino.com.ar/" target="_blank" rel="noopener noreferrer">Yateino</a>
+        </li>
         <li><a [href]="linkedinUrl" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
         <li><a [href]="githubUrl" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-        <li><a [href]="instagramUrl" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a [href]="youtubeUrl" target="_blank" rel="noopener noreferrer">YouTube</a></li>
       </ul>
     </div>
   </div>

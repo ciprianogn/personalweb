@@ -1,7 +1,7 @@
 <main id="main-content" class="page-shell">
   <section class="hero-section page-hero-compact">
     <div class="section-heading max-w-5xl">
-      <p class="section-eyebrow">Comunicación y misión</p>
+      <p class="section-eyebrow">Proyectos</p>
       <h1 class="hero-title">{{ site.missionPage.title }}</h1>
       <p class="hero-copy">{{ site.missionPage.intro }}</p>
     </div>
@@ -9,10 +9,11 @@
 
   <section class="section">
     <div class="section-heading">
-      <p class="section-eyebrow">Sistema de capas</p>
-      <h2 class="section-title">La comunicación necesita propósito, estructura y operación.</h2>
+      <p class="section-eyebrow">Forma de trabajo</p>
+      <h2 class="section-title">Del contexto a una solución que puede evolucionar.</h2>
       <p class="section-description">
-        No pienso estas capas como servicios separados. Funcionan como un mapa de trabajo para ordenar decisión, contenido, tecnología y aprendizaje.
+        Estas etapas no son una receta rígida. Son una forma de evitar que la implementación se
+        desconecte del problema original.
       </p>
     </div>
 
@@ -33,12 +34,12 @@
 
   <section class="section">
     <div class="section-heading">
-      <p class="section-eyebrow">Experiencias</p>
-      <h2 class="section-title">Dos contextos donde esta mirada se volvió concreta.</h2>
+      <p class="section-eyebrow">Trabajo seleccionado</p>
+      <h2 class="section-title">Tres contextos, un mismo criterio de ejecución.</h2>
     </div>
 
     <div class="mission-evidence-grid">
-      @for (item of site.missionCases; track item.title; let index = $index) {
+      @for (item of site.selectedWork; track item.title; let index = $index) {
         <article class="panel" [class.evidence-highlight]="index === 0">
           <p class="section-eyebrow">{{ item.eyebrow }}</p>
           <h3 class="mission-title">{{ item.title }}</h3>
@@ -84,13 +85,17 @@
     <div class="cta-split">
       <article class="panel-strong">
         <p class="section-eyebrow">Conversación</p>
-        <h2 class="mission-title">Si necesitás ordenar mensaje, equipo, procesos o plataforma, lo podemos trabajar.</h2>
-        <a class="button-primary" routerLink="/contacto">Conversar sobre un proyecto</a>
+        <h2 class="mission-title">
+          Si necesitás ordenar un problema, un proceso o un producto, lo podemos trabajar.
+        </h2>
+        <a class="button-primary" routerLink="/contacto">Contarme el contexto</a>
       </article>
 
       <article class="panel">
         <p class="section-eyebrow">Trayectoria</p>
-        <h2 class="mission-title">Si querés evaluar el costado técnico y profesional, seguí por experiencia.</h2>
+        <h2 class="mission-title">
+          Si querés evaluar mi recorrido técnico y profesional, seguí por experiencia.
+        </h2>
         <a class="button-secondary" routerLink="/experiencia">Ver experiencia y CV</a>
       </article>
     </div>

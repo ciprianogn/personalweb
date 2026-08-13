@@ -24,9 +24,9 @@ export class Blog implements OnInit {
 
   ngOnInit(): void {
     this.seo.update({
-      title: 'Ideas sobre comunicación, misión y tecnología | Cipriano Gorosito',
+      title: 'Ideas sobre producto, tecnología y liderazgo | Cipriano Gorosito',
       description:
-        'Artículos y reflexiones sobre comunicación cristiana, estrategia, creatividad, producto y tecnología aplicada.',
+        'Notas y aprendizajes sobre producto, desarrollo de software, procesos, automatización y liderazgo técnico.',
       path: '/contenido',
       type: 'website',
     });
@@ -61,7 +61,10 @@ export class Blog implements OnInit {
   }
 
   excerptFor(post: ContentPost): string {
-    return post.excerpt.rendered.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+    return post.excerpt.rendered
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
   readingTimeFor(post: ContentPost): string {

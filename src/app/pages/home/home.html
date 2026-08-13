@@ -1,320 +1,190 @@
-<main id="main-content" class="page-shell">
-  <section class="hero-section">
-    <div class="editorial-grid hero-layout">
-      <div class="space-y-7">
+<main id="main-content" class="page-shell home-page">
+  <section class="hero-section home-hero">
+    <div class="home-hero-grid">
+      <div class="home-hero-copy">
         <div class="signal-line hero-signal">
-          <span class="signal-node"></span>
           <span class="signal-node"></span>
           <span class="signal-node"></span>
           <span class="signal-node"></span>
           <span class="hero-signal-copy">{{ site.hero.eyebrow }}</span>
         </div>
 
-        <h1 class="hero-title">{{ site.hero.title }}</h1>
-        <p class="hero-copy">{{ site.hero.description }}</p>
+        <h1 class="home-title">{{ site.hero.title }}</h1>
+        <p class="home-intro">{{ site.hero.description }}</p>
 
         <div class="button-row">
-          <a class="button-primary" routerLink="/sobre-mi" (click)="track('hero_primary_cta_click')">
+          <a
+            class="button-primary"
+            [routerLink]="site.hero.primaryCta.path"
+            (click)="track('hero_experience_click')"
+          >
             {{ site.hero.primaryCta.label }}
           </a>
-          <a class="button-secondary" routerLink="/experiencia">
+          <a class="button-secondary" [routerLink]="site.hero.secondaryCta.path">
             {{ site.hero.secondaryCta.label }}
           </a>
         </div>
-
-        <div class="hero-gridline">
-          <div class="hero-gridline-label">Propósito → mensaje → sistema → impacto</div>
-        </div>
       </div>
 
-      <div class="hero-visual">
-        <div class="hero-frame">
-          <figure class="hero-portrait">
-            <img
-              src="assets/img/home-hero.jpg"
-              alt="Retrato de Cipriano Gorosito"
-              width="864"
-              height="1184"
-              fetchpriority="high"
-            />
-          </figure>
-
-          <div class="hero-aside">
-            <p class="section-eyebrow">Perfil</p>
-            <p class="hero-aside-title">Estrategia, software, contenido y misión dentro de un mismo criterio.</p>
-            <p class="hero-aside-copy">
-              Pienso el problema, ordeno la estructura y construyo la herramienta o el sistema que falta para sostenerlo.
-            </p>
-          </div>
+      <div class="home-portrait-column">
+        <figure class="home-portrait">
+          <img
+            src="assets/img/home-hero.jpg"
+            alt="Retrato de Cipriano Gorosito"
+            width="864"
+            height="1184"
+            fetchpriority="high"
+          />
+        </figure>
+        <div class="portrait-note">
+          <span>Buenos Aires · Argentina</span>
+          <p>Desarrollo de software y producto con mirada de operación.</p>
         </div>
       </div>
     </div>
-  </section>
 
-  <section class="section section-tight-top">
-    <div class="context-bar" aria-label="Resumen profesional">
-      @for (item of site.hero.contextBar; track item) {
-        <span class="context-item">{{ item }}</span>
+    <div class="proof-rail" aria-label="Resumen profesional">
+      @for (item of site.hero.contextBar; track item; let index = $index) {
+        <div class="proof-item">
+          <span>{{ (index + 1).toString().padStart(2, '0') }}</span>
+          <p>{{ item }}</p>
+        </div>
       }
     </div>
   </section>
 
-  <section class="section">
-    <app-communication-system
-      [title]="'Comunicar no es publicar piezas sueltas.'"
-      [description]="'Trabajo la comunicación como un sistema que conecta intención, narrativa, canales, herramientas y aprendizaje.'"
-      [stages]="site.communicationSystem"
-    />
-  </section>
-
-  <section class="section">
-    <div class="section-heading">
-      <p class="section-eyebrow">Comunicación puesta al servicio</p>
-      <h2 class="section-title">Aprendizaje real en misión, equipos y procesos.</h2>
+  <section class="section home-section">
+    <div class="section-intro-grid">
+      <div>
+        <p class="section-eyebrow">Trabajo seleccionado</p>
+        <h2 class="section-title">Problemas reales. Decisiones concretas.</h2>
+      </div>
       <p class="section-description">
-        Iglesia Dominico y Wenumew siguen siendo dos experiencias clave, pero no como tarjetas gemelas: una muestra dirección aplicada y la otra, experimentación editorial y reconstrucción.
+        El hilo común no es una tecnología: es llevar una necesidad poco definida hasta una solución
+        que alguien puede usar y sostener.
       </p>
     </div>
 
-    <div class="mission-home-grid">
-      <article class="panel-strong mission-primary">
-        <p class="section-eyebrow">{{ site.missionCases[0].eyebrow }}</p>
-        <h3 class="mission-title">{{ site.missionCases[0].title }}</h3>
-        <p class="mission-copy">{{ site.missionCases[0].description }}</p>
-        <p class="mission-context">{{ site.missionCases[0].context }}</p>
-        <ul class="data-list">
-          @for (item of site.missionCases[0].contribution; track item) {
-            <li>{{ item }}</li>
-          }
-        </ul>
-        <p class="mission-learning">{{ site.missionCases[0].learning }}</p>
-        <a
-          class="external-link"
-          [href]="site.missionCases[0].url"
-          target="_blank"
-          rel="noopener noreferrer"
-          (click)="track('iglesia_dominico_click')"
-        >
-          <span>{{ site.missionCases[0].cta }}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </article>
+    <div class="work-list">
+      @for (item of site.selectedWork; track item.title; let index = $index) {
+        <article class="work-item">
+          <div class="work-index">{{ (index + 1).toString().padStart(2, '0') }}</div>
+          <div class="work-heading">
+            <p class="section-eyebrow">{{ item.eyebrow }}</p>
+            <h3>{{ item.title }}</h3>
+          </div>
+          <div class="work-body">
+            <p>{{ item.description }}</p>
+            <ul>
+              @for (detail of item.contribution.slice(0, 3); track detail) {
+                <li>{{ detail }}</li>
+              }
+            </ul>
+            <a
+              class="external-link"
+              [href]="item.url"
+              [attr.target]="item.url.startsWith('http') ? '_blank' : null"
+              [attr.rel]="item.url.startsWith('http') ? 'noopener noreferrer' : null"
+            >
+              <span>{{ item.cta }}</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
 
-      <article class="panel mission-secondary">
-        <p class="section-eyebrow">{{ site.missionCases[1].eyebrow }}</p>
-        <h3 class="mission-title">{{ site.missionCases[1].title }}</h3>
-        <p class="mission-copy">{{ site.missionCases[1].description }}</p>
-        <p class="mission-context">{{ site.missionCases[1].context }}</p>
+  <section class="section home-section leadership-section">
+    <div class="section-intro-grid">
+      <div>
+        <p class="section-eyebrow">Liderazgo en la práctica</p>
+        <h2 class="section-title">Hacer que el trabajo avance.</h2>
+      </div>
+      <p class="section-description">
+        Para mí, liderar no es sumar grandilocuencia. Es dar claridad, conectar personas y hacerse
+        cargo de que la solución llegue a destino.
+      </p>
+    </div>
+
+    <div class="leadership-grid">
+      @for (principle of site.leadershipPrinciples; track principle.index) {
+        <article class="leadership-card">
+          <span>{{ principle.index }}</span>
+          <h3>{{ principle.title }}</h3>
+          <p>{{ principle.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="section home-section">
+    <div class="experience-feature">
+      <div class="experience-feature-main">
+        <p class="section-eyebrow">Experiencia actual</p>
+        <h2>{{ site.homeExperience.title }}</h2>
+        <p>{{ site.homeExperience.summary }}</p>
+        <div class="button-row">
+          <a class="button-primary" routerLink="/experiencia">Ver recorrido completo</a>
+          <a class="button-ghost" [href]="site.cvDownloadPath" download>Descargar CV ↘</a>
+        </div>
+      </div>
+
+      <aside class="experience-feature-aside">
+        <div class="experience-meta">
+          <span>{{ site.homeExperience.currentRole.period }}</span>
+          <span>{{ site.homeExperience.currentRole.location }}</span>
+        </div>
+        <h3>{{ site.homeExperience.currentRole.title }}</h3>
+        <p class="experience-company">{{ site.homeExperience.currentRole.organization }}</p>
         <div class="label-stack">
-          @for (item of site.missionCases[1].contribution; track item) {
+          @for (item of site.homeExperience.stackPreview; track item) {
             <span class="label-chip">{{ item }}</span>
           }
         </div>
-        <p class="mission-learning">{{ site.missionCases[1].learning }}</p>
-        <a
-          class="external-link"
-          [href]="site.missionCases[1].url"
-          target="_blank"
-          rel="noopener noreferrer"
-          (click)="track('wenumew_click')"
-        >
-          <span>{{ site.missionCases[1].cta }}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </article>
+      </aside>
     </div>
   </section>
 
-  <section class="section">
-    <div class="experience-preview">
-      <div class="section-heading">
-        <p class="section-eyebrow">Experiencia profesional</p>
-        <h2 class="section-title">{{ site.homeExperience.title }}</h2>
-        <p class="section-description">{{ site.homeExperience.summary }}</p>
-      </div>
-
-      <div class="experience-preview-grid">
-        <article class="panel-strong">
-          <div class="experience-meta">
-            <span>{{ site.homeExperience.currentRole.period }}</span>
-            <span>{{ site.homeExperience.currentRole.location }}</span>
-          </div>
-          <h3 class="experience-title">{{ site.homeExperience.currentRole.title }}</h3>
-          <p class="experience-company">{{ site.homeExperience.currentRole.organization }}</p>
-          <p class="experience-copy">{{ site.homeExperience.currentRole.description }}</p>
-          <ul class="data-list">
-            @for (item of site.homeExperience.currentRole.highlights; track item) {
-              <li>{{ item }}</li>
-            }
-          </ul>
-        </article>
-
-        <aside class="panel">
-          <p class="section-eyebrow">Stack resumido</p>
-          <div class="label-stack">
-            @for (item of site.homeExperience.stackPreview; track item) {
-              <span class="label-chip">{{ item }}</span>
-            }
-          </div>
-          <div class="button-row preview-actions">
-            <a class="button-secondary" routerLink="/experiencia">Ir a experiencia</a>
-            <a class="button-ghost" [href]="site.cvDownloadPath" download>Descargar CV</a>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
+  <section class="section home-section ecosystem-section">
     <div class="section-heading">
-      <p class="section-eyebrow">Ecosistema profesional</p>
-      <h2 class="section-title">Los portfolios viven en sus espacios correctos.</h2>
-      <p class="section-description">
-        Esta web ordena mi perfil. Prichelco y Yateino muestran el trabajo donde tiene más sentido verlo.
-      </p>
+      <p class="section-eyebrow">Ecosistema de trabajo</p>
+      <h2 class="section-title">Dos espacios, una misma forma de construir.</h2>
     </div>
 
-    <div class="ecosystem-grid">
-      <article class="ecosystem-panel ecosystem-panel-tech">
-        <p class="section-eyebrow">{{ site.ecosystem[0].eyebrow }}</p>
-        <h3 class="mission-title">{{ site.ecosystem[0].title }}</h3>
-        <p class="mission-copy">{{ site.ecosystem[0].description }}</p>
-        <ul class="data-list">
-          @for (detail of site.ecosystem[0].details; track detail) {
-            <li>{{ detail }}</li>
-          }
-        </ul>
-        <a
-          class="external-link"
-          [href]="site.ecosystem[0].url"
-          target="_blank"
-          rel="noopener noreferrer"
-          [attr.aria-label]="site.ecosystem[0].ariaLabel"
-          (click)="track('prichelco_external_click')"
-        >
-          <span>{{ site.ecosystem[0].cta }}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </article>
-
-      <article class="ecosystem-panel ecosystem-panel-editorial">
-        <p class="section-eyebrow">{{ site.ecosystem[1].eyebrow }}</p>
-        <h3 class="mission-title">{{ site.ecosystem[1].title }}</h3>
-        <p class="mission-copy">{{ site.ecosystem[1].description }}</p>
-        <ul class="data-list">
-          @for (detail of site.ecosystem[1].details; track detail) {
-            <li>{{ detail }}</li>
-          }
-        </ul>
-        <a
-          class="external-link"
-          [href]="site.ecosystem[1].url"
-          target="_blank"
-          rel="noopener noreferrer"
-          [attr.aria-label]="site.ecosystem[1].ariaLabel"
-          (click)="track('yateino_external_click')"
-        >
-          <span>{{ site.ecosystem[1].cta }}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
-      </article>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="section-heading">
-      <p class="section-eyebrow">Contenido</p>
-      <h2 class="section-title">Ideas, criterio y aprendizajes en publicación.</h2>
-      <p class="section-description">
-        El objetivo no es llenar un blog, sino sostener un espacio editorial propio sobre comunicación, misión, producto y tecnología.
-      </p>
-    </div>
-
-    @if (featuredPosts.length) {
-      <div class="home-content-grid">
-        @if (featuredPosts[0]; as featured) {
-          <article class="panel-strong home-featured-article">
-            @if (imageFor(featured)) {
-              <img
-                class="home-featured-image"
-                [src]="imageFor(featured)!"
-                [alt]="altFor(featured)"
-                width="1200"
-                height="675"
-              />
-            }
-            <div class="space-y-4">
-              <div class="article-meta">
-                <span>Artículo destacado</span>
-                <span>{{ featured.date | date: 'd MMM y' }}</span>
-                <span>{{ readingTimeFor(featured) }}</span>
-              </div>
-              <h3 class="mission-title">
-                <a [routerLink]="['/contenido', featured.slug]" (click)="track('article_open', { slug: featured.slug })">
-                  {{ featured.title.rendered }}
-                </a>
-              </h3>
-              <p class="mission-copy">{{ excerptFor(featured) }}</p>
-              <a class="inline-link" [routerLink]="['/contenido', featured.slug]">Leer artículo</a>
-            </div>
-          </article>
-        }
-
-        <div class="panel content-side-list">
-          <div class="label-stack content-theme-list">
-            @for (theme of site.contentPage.themes; track theme.label) {
-              <span class="label-chip">{{ theme.label }}</span>
-            }
+    <div class="ecosystem-links">
+      @for (item of site.ecosystem; track item.title; let index = $index) {
+        <a [href]="item.url" target="_blank" rel="noopener noreferrer" class="ecosystem-link">
+          <span>{{ (index + 1).toString().padStart(2, '0') }}</span>
+          <div>
+            <p class="section-eyebrow">{{ item.eyebrow }}</p>
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
           </div>
-
-          @for (post of featuredPosts.slice(1); track post.id) {
-            <article class="content-list-item">
-              <div class="article-meta">
-                <span>{{ post.date | date: 'd MMM y' }}</span>
-                <span>{{ readingTimeFor(post) }}</span>
-              </div>
-              <h3 class="content-list-title">
-                <a [routerLink]="['/contenido', post.slug]" (click)="track('article_open', { slug: post.slug })">
-                  {{ post.title.rendered }}
-                </a>
-              </h3>
-              <p class="content-list-copy">{{ excerptFor(post) }}</p>
-            </article>
-          }
-
-          <a class="inline-link" routerLink="/contenido">Ir a la sección de contenido</a>
-        </div>
-      </div>
-    } @else {
-      <article class="panel max-w-3xl">
-        <h3 class="mission-title">El espacio editorial se está reorganizando.</h3>
-        <p class="mission-copy">
-          Ya podés entrar a la sección de contenido para leer artículos y reflexiones recientes sobre misión, trabajo y tecnología.
-        </p>
-        <a class="inline-link" routerLink="/contenido">Ir a contenido</a>
-      </article>
-    }
+          <strong aria-hidden="true">↗</strong>
+        </a>
+      }
+    </div>
   </section>
 
-  <section class="section">
-    <div class="cta-split">
-      <article class="panel-strong">
-        <p class="section-eyebrow">Proyectos, iglesias o ministerios</p>
-        <h2 class="mission-title">{{ site.finalCta.missionTitle }}</h2>
-        <p class="mission-copy">{{ site.finalCta.missionText }}</p>
-        <a class="button-primary" routerLink="/contacto" (click)="track('contact_click', { source: 'mission_cta' })">
-          {{ site.finalCta.missionAction.label }}
-        </a>
-      </article>
-
-      <article class="panel">
-        <p class="section-eyebrow">Oportunidades profesionales</p>
-        <h2 class="mission-title">{{ site.finalCta.careerTitle }}</h2>
-        <p class="mission-copy">{{ site.finalCta.careerText }}</p>
-        <a class="button-secondary" routerLink="/experiencia">
-          {{ site.finalCta.careerAction.label }}
-        </a>
-      </article>
+  <section class="section home-section home-contact">
+    <p class="section-eyebrow">Próxima conversación</p>
+    <h2>Si hay un problema complejo sobre la mesa, empecemos por entenderlo bien.</h2>
+    <div class="button-row">
+      <a
+        class="button-primary"
+        routerLink="/contacto"
+        (click)="track('contact_click', { source: 'home_final' })"
+      >
+        Contactarme
+      </a>
+      <a
+        class="button-secondary"
+        [href]="site.linkedinUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        >LinkedIn ↗</a
+      >
     </div>
   </section>
 </main>

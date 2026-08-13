@@ -35,25 +35,27 @@
             <span>Oportunidad profesional</span>
           </label>
 
-          <label class="segment-option" [class.is-active]="contactMode() === 'mission'">
+          <label class="segment-option" [class.is-active]="contactMode() === 'project'">
             <input
               type="radio"
               name="contact-mode"
-              [checked]="contactMode() === 'mission'"
-              (change)="setMode('mission')"
+              [checked]="contactMode() === 'project'"
+              (change)="setMode('project')"
             />
-            <span>Proyecto o misión</span>
+            <span>Proyecto digital</span>
           </label>
         </fieldset>
 
         <div class="segment-intro" aria-live="polite">
           @if (contactMode() === 'career') {
             <p class="mission-copy">
-              Para empresas, recruiters, equipos de producto, colaboraciones técnicas y oportunidades profesionales.
+              Para empresas, recruiters, equipos de producto, colaboraciones técnicas y
+              oportunidades profesionales.
             </p>
           } @else {
             <p class="mission-copy">
-              Para iglesias, ministerios, marcas, organizaciones o proyectos que necesitan estrategia, contenido, tecnología o sistema.
+              Para equipos, empresas o iniciativas que necesitan ordenar un producto, proceso,
+              integración o sistema.
             </p>
           }
         </div>
@@ -94,7 +96,9 @@
                   <option value="">Elegí una opción</option>
                   <option value="Puesto full-time">Puesto full-time</option>
                   <option value="Colaboración por proyecto">Colaboración por proyecto</option>
-                  <option value="Consultoría técnica o estratégica">Consultoría técnica o estratégica</option>
+                  <option value="Consultoría técnica o estratégica">
+                    Consultoría técnica o estratégica
+                  </option>
                   <option value="Otra oportunidad">Otra oportunidad</option>
                 </select>
               </div>
@@ -119,9 +123,9 @@
                 <label for="projectType">Tipo de proyecto</label>
                 <select id="projectType" formControlName="projectType">
                   <option value="">Elegí una opción</option>
-                  <option value="Iglesia o ministerio">Iglesia o ministerio</option>
-                  <option value="Marca u organización">Marca u organización</option>
-                  <option value="Proyecto de contenido">Proyecto de contenido</option>
+                  <option value="Producto nuevo">Producto nuevo</option>
+                  <option value="Evolución de sistema">Evolución de sistema</option>
+                  <option value="Automatización o integración">Automatización o integración</option>
                   <option value="Plataforma o sistema digital">Plataforma o sistema digital</option>
                 </select>
               </div>
@@ -131,8 +135,8 @@
                 <select id="stage" formControlName="stage">
                   <option value="">Elegí una opción</option>
                   <option value="Diagnóstico">Diagnóstico</option>
-                  <option value="Ordenamiento y estrategia">Ordenamiento y estrategia</option>
-                  <option value="Producción o campaña">Producción o campaña</option>
+                  <option value="Definición y alcance">Definición y alcance</option>
+                  <option value="Diseño de solución">Diseño de solución</option>
                   <option value="Implementación técnica">Implementación técnica</option>
                 </select>
               </div>
@@ -158,7 +162,11 @@
             <input type="text" formControlName="website" tabindex="-1" autocomplete="off" />
           </div>
 
-          <button class="button-primary w-full justify-center md:w-auto" type="submit" [disabled]="form.invalid || enviando">
+          <button
+            class="button-primary w-full justify-center md:w-auto"
+            type="submit"
+            [disabled]="form.invalid || enviando"
+          >
             {{
               enviando
                 ? 'Enviando...'

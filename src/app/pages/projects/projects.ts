@@ -16,10 +16,10 @@ export class Projects implements OnInit {
 
   ngOnInit(): void {
     this.seo.update({
-      title: 'Comunicación cristiana, estrategia y tecnología | Cipriano Gorosito',
+      title: 'Proyectos de producto y tecnología | Cipriano Gorosito',
       description:
-        'Una mirada integral sobre comunicación para la misión: propósito, mensaje, equipos, contenido, tecnología y aprendizaje.',
-      path: '/comunicacion-y-mision',
+        'Proyectos y experiencias conectando análisis funcional, desarrollo de software, automatización y coordinación entre áreas.',
+      path: '/proyectos',
       type: 'website',
     });
   }

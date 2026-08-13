@@ -16,7 +16,5 @@ export class Footer {
   readonly email = siteConfig.email;
   readonly linkedinUrl = siteConfig.linkedinUrl;
   readonly githubUrl = siteConfig.githubUrl;
-  readonly instagramUrl = 'https://www.instagram.com/ciprianogn/';
-  readonly youtubeUrl = 'https://www.youtube.com/@ciprianogn';
   readonly cvPath = siteConfig.cvDownloadPath;
 }
